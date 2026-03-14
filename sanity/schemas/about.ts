@@ -9,11 +9,20 @@ export default defineType({
       name: 'heading',
       title: 'Heading',
       type: 'string',
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'tagline',
       title: 'Tagline',
       type: 'string',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'roles',
+      title: 'Animated Roles',
+      type: 'array',
+      of: [{type: 'string'}],
+      description: 'Roles that rotate in the hero section (e.g. ".NET Developer", "Homelab Enthusiast")',
     }),
     defineField({
       name: 'body',
@@ -25,9 +34,7 @@ export default defineType({
       name: 'profileImage',
       title: 'Profile Image',
       type: 'image',
-      options: {
-        hotspot: true,
-      },
+      options: {hotspot: true},
     }),
     defineField({
       name: 'resumeFile',
@@ -35,4 +42,10 @@ export default defineType({
       type: 'file',
     }),
   ],
+  preview: {
+    select: {
+      title: 'heading',
+      media: 'profileImage',
+    },
+  },
 })

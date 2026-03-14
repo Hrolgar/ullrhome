@@ -4,6 +4,10 @@ import skill from './skill'
 import experience from './experience'
 import project from './project'
 import contactInfo from './contactInfo'
+import post from './post'
+import category from './category'
+import certification from './certification'
+import homelabService from './homelabService'
 
 export const schemaTypes = [
   siteSettings,
@@ -12,4 +16,8 @@ export const schemaTypes = [
   experience,
   project,
   contactInfo,
+  post,
+  category,
+  certification,
+  homelabService,
 ]

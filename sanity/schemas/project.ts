@@ -15,10 +15,8 @@ export default defineType({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      options: {
-        source: 'title',
-        maxLength: 96,
-      },
+      options: {source: 'title', maxLength: 96},
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'summary',
@@ -29,15 +27,26 @@ export default defineType({
       name: 'description',
       title: 'Description',
       type: 'array',
-      of: [{type: 'block'}],
+      of: [
+        {type: 'block'},
+        {
+          type: 'image',
+          options: {hotspot: true},
+          fields: [
+            defineField({
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+            }),
+          ],
+        },
+      ],
     }),
     defineField({
       name: 'image',
-      title: 'Image',
+      title: 'Cover Image',
       type: 'image',
-      options: {
-        hotspot: true,
-      },
+      options: {hotspot: true},
     }),
     defineField({
       name: 'technologies',
@@ -59,6 +68,7 @@ export default defineType({
       name: 'featured',
       title: 'Featured',
       type: 'boolean',
+      initialValue: false,
     }),
     defineField({
       name: 'order',
@@ -66,4 +76,11 @@ export default defineType({
       type: 'number',
     }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      subtitle: 'summary',
+      media: 'image',
+    },
+  },
 })

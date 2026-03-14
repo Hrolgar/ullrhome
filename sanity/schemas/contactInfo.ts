@@ -21,6 +21,16 @@ export default defineType({
       type: 'url',
     }),
     defineField({
+      name: 'twitter',
+      title: 'Twitter / X',
+      type: 'url',
+    }),
+    defineField({
+      name: 'mastodon',
+      title: 'Mastodon',
+      type: 'url',
+    }),
+    defineField({
       name: 'location',
       title: 'Location',
       type: 'string',
@@ -29,6 +39,20 @@ export default defineType({
       name: 'availableForWork',
       title: 'Available for Work',
       type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'contactFormEnabled',
+      title: 'Enable Contact Form',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Show a contact form instead of just links',
     }),
   ],
+  preview: {
+    select: {title: 'email'},
+    prepare({title}) {
+      return {title: title || 'Contact Info'}
+    },
+  },
 })
