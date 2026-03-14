@@ -25,6 +25,9 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description,
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://ullrhome.com"),
+    icons: {
+      icon: "/icon.svg",
+    },
     openGraph: {
       type: "website",
       siteName,

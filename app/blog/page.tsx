@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Blog | Ullrhome",
+  title: "Blog",
   description: "Thoughts on development, homelab, and technology",
 };
 
@@ -39,9 +39,13 @@ export default async function BlogPage() {
           {/* Category filters */}
           {categories.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-10">
-              <span className="text-xs bg-primary/20 text-primary px-3 py-1.5 rounded-full font-medium">
+              <a
+                href="/blog"
+                className="text-xs bg-primary/20 text-primary px-3 py-1.5 rounded-full font-medium"
+                aria-current="page"
+              >
                 All
-              </span>
+              </a>
               {categories.map((cat) => (
                 <a
                   key={cat._id}
@@ -66,6 +70,7 @@ export default async function BlogPage() {
                   key={post._id}
                   href={`/blog/${post.slug.current}`}
                   className="group block bg-surface rounded-xl overflow-hidden border border-border card-glow"
+                  aria-label={`Read: ${post.title}`}
                 >
                   {post.coverImage && (
                     <div className="overflow-hidden aspect-video">
@@ -80,7 +85,7 @@ export default async function BlogPage() {
                   )}
                   <div className="p-5">
                     <div className="flex items-center gap-3 mb-3">
-                      <time className="text-xs text-muted">
+                      <time className="text-xs text-muted" dateTime={post.publishedAt}>
                         {formatDate(post.publishedAt)}
                       </time>
                       {post.featured && (

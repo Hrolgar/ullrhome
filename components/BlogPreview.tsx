@@ -56,7 +56,7 @@ export default function BlogPreview({ posts }: Props) {
                   </div>
                 )}
                 <div className="p-5">
-                  <time className="text-xs text-muted">{formatDate(post.publishedAt)}</time>
+                  <time className="text-xs text-muted" dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
                   <h3 className="text-lg font-semibold mt-2 mb-2 group-hover:text-primary transition-colors">
                     {post.title}
                   </h3>

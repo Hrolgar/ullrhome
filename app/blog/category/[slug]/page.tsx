@@ -116,7 +116,7 @@ export default async function CategoryPage({ params }: PageProps) {
                     </div>
                   )}
                   <div className="p-5">
-                    <time className="text-xs text-muted">
+                    <time className="text-xs text-muted" dateTime={post.publishedAt}>
                       {formatDate(post.publishedAt)}
                     </time>
                     <h2 className="text-lg font-semibold mt-2 mb-2 group-hover:text-primary transition-colors">

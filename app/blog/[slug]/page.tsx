@@ -76,7 +76,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
           <header className="mb-10">
             <div className="flex items-center gap-3 mb-4 flex-wrap">
-              <time className="text-sm text-muted">{formatDate(post.publishedAt)}</time>
+              <time className="text-sm text-muted" dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
               {readTime && (
                 <>
                   <span className="text-border">·</span>
