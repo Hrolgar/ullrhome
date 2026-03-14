@@ -3,12 +3,12 @@
 import { useState, useEffect, useCallback } from "react";
 
 const sections = [
-  { label: "About", href: "#about", id: "about" },
-  { label: "Skills", href: "#skills", id: "skills" },
-  { label: "Experience", href: "#experience", id: "experience" },
-  { label: "Projects", href: "#projects", id: "projects" },
+  { label: "About", href: "/#about", id: "about" },
+  { label: "Skills", href: "/#skills", id: "skills" },
+  { label: "Experience", href: "/#experience", id: "experience" },
+  { label: "Projects", href: "/#projects", id: "projects" },
   { label: "Blog", href: "/blog", id: null },
-  { label: "Contact", href: "#contact", id: "contact" },
+  { label: "Contact", href: "/#contact", id: "contact" },
 ];
 
 export default function Navbar() {

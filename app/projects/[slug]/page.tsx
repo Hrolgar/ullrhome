@@ -46,7 +46,7 @@ export default async function ProjectPage({ params }: PageProps) {
   return (
     <>
       <Navbar />
-      <main className="pt-24 pb-16 px-6">
+      <main id="main-content" className="pt-24 pb-16 px-6">
         <article className="max-w-4xl mx-auto">
           {/* Back link */}
           <a

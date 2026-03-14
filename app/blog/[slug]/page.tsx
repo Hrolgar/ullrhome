@@ -65,7 +65,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   return (
     <>
       <Navbar />
-      <main className="pt-24 pb-16 px-6">
+      <main id="main-content" className="pt-24 pb-16 px-6">
         <article className="max-w-3xl mx-auto">
           <a
             href="/blog"

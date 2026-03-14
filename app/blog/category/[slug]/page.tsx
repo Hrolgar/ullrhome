@@ -50,7 +50,7 @@ export default async function CategoryPage({ params }: PageProps) {
   return (
     <>
       <Navbar />
-      <main className="pt-24 pb-16 px-6">
+      <main id="main-content" className="pt-24 pb-16 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
             <a
