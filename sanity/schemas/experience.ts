@@ -12,6 +12,11 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'companyLogo',
+      title: 'Company Logo',
+      type: 'image',
+    }),
+    defineField({
       name: 'role',
       title: 'Role',
       type: 'string',
@@ -32,6 +37,7 @@ export default defineType({
       name: 'endDate',
       title: 'End Date',
       type: 'date',
+      description: 'Leave empty for current position',
     }),
     defineField({
       name: 'description',
@@ -51,4 +57,11 @@ export default defineType({
       type: 'number',
     }),
   ],
+  preview: {
+    select: {
+      title: 'role',
+      subtitle: 'company',
+      media: 'companyLogo',
+    },
+  },
 })

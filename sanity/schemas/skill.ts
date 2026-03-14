@@ -21,9 +21,12 @@ export default defineType({
           {title: 'Framework', value: 'framework'},
           {title: 'Tool', value: 'tool'},
           {title: 'Platform', value: 'platform'},
+          {title: 'Database', value: 'database'},
+          {title: 'DevOps', value: 'devops'},
           {title: 'Other', value: 'other'},
         ],
       },
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'icon',
@@ -32,7 +35,7 @@ export default defineType({
     }),
     defineField({
       name: 'proficiency',
-      title: 'Proficiency',
+      title: 'Proficiency (1-5)',
       type: 'number',
       validation: (rule) => rule.min(1).max(5),
     }),
@@ -42,4 +45,11 @@ export default defineType({
       type: 'number',
     }),
   ],
+  preview: {
+    select: {
+      title: 'name',
+      subtitle: 'category',
+      media: 'icon',
+    },
+  },
 })
