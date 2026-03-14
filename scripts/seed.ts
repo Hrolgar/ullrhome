@@ -34,8 +34,7 @@ async function seed() {
     _id: "siteSettings",
     _type: "siteSettings",
     siteName: "Ullrhome",
-    siteDescription:
-      "Personal portfolio and blog of Hrolgar — .NET developer, homelab enthusiast, and builder of things.",
+    siteDescription: "Personal portfolio and blog of Hrolgar",
   });
 
   // --- About ---
@@ -44,7 +43,7 @@ async function seed() {
     _id: "about",
     _type: "about",
     heading: "Hrolgar",
-    tagline: "Building software by day, infrastructure by night",
+    tagline: "Building software by day infrastructure by night",
     roles: [
       ".NET Developer",
       "Homelab Enthusiast",
@@ -53,10 +52,10 @@ async function seed() {
     ],
     body: [
       block(
-        "I'm Helgi — most people online know me as Hrolgar. By day I build financial applications at SpareBank 1, working across the .NET stack in the Norwegian banking sector. It's the kind of work where reliability isn't optional and you learn to appreciate well-tested code. Outside of office hours, I disappear into my homelab."
+        "I'm a .NET developer at SpareBank 1 in Norway, building financial applications in the Norwegian banking sector. My day-to-day revolves around the .NET stack — C#, ASP.NET Core, Entity Framework, SQL Server — where reliability isn't optional and every line of code handles real money. It's the kind of work that teaches you to appreciate well-tested systems and defensive programming."
       ),
       block(
-        "I run everything I can on my own hardware — media servers, identity providers, monitoring, the lot. My latest obsession is Hrolbot, an AI agent system running on a Raspberry Pi 5 that coordinates autonomous Claude Code agents through an MCP mesh. It's equal parts practical and ridiculous, which is exactly how I like my side projects."
+        "Outside of work, I disappear into my homelab. I run an extensive self-hosted infrastructure on Proxmox — everything from media servers and identity providers to monitoring dashboards and secrets management. My latest project is Hrolbot, an AI agent system running on a Raspberry Pi 5 that coordinates autonomous Claude Code agents through an MCP mesh. Each agent specializes in a different role — frontend, backend, code review — and they communicate through structured messages to ship real code. It's equal parts practical and ridiculous, which is exactly how I like my side projects."
       ),
     ],
   });
@@ -67,9 +66,8 @@ async function seed() {
     _id: "contactInfo",
     _type: "contactInfo",
     github: "https://github.com/Hrolgar",
-    location: "Ålesund, Norway",
+    location: "Aalesund Norway",
     availableForWork: false,
-    contactFormEnabled: false,
   });
 
   // --- Skills ---
@@ -84,7 +82,7 @@ async function seed() {
     { name: "SQL", category: "language", proficiency: 4, order: 6 },
     { name: "Bash", category: "language", proficiency: 3, order: 7 },
     // Frameworks
-    { name: ".NET/ASP.NET Core", category: "framework", proficiency: 5, order: 8 },
+    { name: ".NET", category: "framework", proficiency: 5, order: 8 },
     { name: "React", category: "framework", proficiency: 3, order: 9 },
     { name: "Next.js", category: "framework", proficiency: 3, order: 10 },
     { name: "Blazor", category: "framework", proficiency: 3, order: 11 },
@@ -93,24 +91,22 @@ async function seed() {
     { name: "Docker", category: "devops", proficiency: 4, order: 13 },
     { name: "Proxmox", category: "devops", proficiency: 4, order: 14 },
     { name: "Cloudflare", category: "devops", proficiency: 3, order: 15 },
-    { name: "Nginx", category: "devops", proficiency: 3, order: 16 },
-    { name: "GitHub Actions", category: "devops", proficiency: 4, order: 17 },
-    { name: "OpenTofu/Terraform", category: "devops", proficiency: 3, order: 18 },
+    { name: "GitHub Actions", category: "devops", proficiency: 4, order: 16 },
+    { name: "OpenTofu", category: "devops", proficiency: 3, order: 17 },
     // Databases
-    { name: "PostgreSQL", category: "database", proficiency: 4, order: 19 },
-    { name: "SQL Server", category: "database", proficiency: 4, order: 20 },
-    { name: "SQLite", category: "database", proficiency: 3, order: 21 },
-    { name: "Redis", category: "database", proficiency: 3, order: 22 },
+    { name: "PostgreSQL", category: "database", proficiency: 4, order: 18 },
+    { name: "SQL Server", category: "database", proficiency: 4, order: 19 },
+    { name: "SQLite", category: "database", proficiency: 3, order: 20 },
+    { name: "Redis", category: "database", proficiency: 3, order: 21 },
     // Tools
-    { name: "Git", category: "tool", proficiency: 4, order: 23 },
-    { name: "VS Code", category: "tool", proficiency: 4, order: 24 },
-    { name: "JetBrains Rider", category: "tool", proficiency: 4, order: 25 },
-    { name: "Linux", category: "tool", proficiency: 4, order: 26 },
-    { name: "Infisical", category: "tool", proficiency: 3, order: 27 },
+    { name: "Git", category: "tool", proficiency: 4, order: 22 },
+    { name: "VS Code", category: "tool", proficiency: 4, order: 23 },
+    { name: "Linux", category: "tool", proficiency: 4, order: 24 },
+    { name: "Infisical", category: "tool", proficiency: 3, order: 25 },
     // Platforms
-    { name: "Azure", category: "platform", proficiency: 3, order: 28 },
-    { name: "Vercel", category: "platform", proficiency: 3, order: 29 },
-    { name: "Raspberry Pi", category: "platform", proficiency: 4, order: 30 },
+    { name: "Azure", category: "platform", proficiency: 3, order: 26 },
+    { name: "Vercel", category: "platform", proficiency: 3, order: 27 },
+    { name: "Raspberry Pi", category: "platform", proficiency: 4, order: 28 },
   ];
 
   const skillIds: Record<string, string> = {};
@@ -131,7 +127,7 @@ async function seed() {
     _type: "experience",
     company: "SpareBank 1",
     role: ".NET Developer",
-    location: "Norway",
+    location: "Aalesund Norway",
     startDate: "2023-01-01",
     description: [
       block(
@@ -140,7 +136,7 @@ async function seed() {
     ],
     technologies: [
       { _type: "reference", _ref: skillIds["C#"], _key: "t1" },
-      { _type: "reference", _ref: skillIds[".NET/ASP.NET Core"], _key: "t2" },
+      { _type: "reference", _ref: skillIds[".NET"], _key: "t2" },
       { _type: "reference", _ref: skillIds["SQL Server"], _key: "t3" },
       { _type: "reference", _ref: skillIds["Azure"], _key: "t4" },
     ],
@@ -207,6 +203,7 @@ async function seed() {
     featured: true,
     categories: [
       { _type: "reference", _ref: categoryIds["homelab"], _key: "c1" },
+      { _type: "reference", _ref: categoryIds["development"], _key: "c2" },
     ],
     tags: ["raspberry-pi", "ai", "claude", "mcp", "hrolbot"],
     body: [
@@ -239,6 +236,7 @@ async function seed() {
     featured: false,
     categories: [
       { _type: "reference", _ref: categoryIds["self-hosting"], _key: "c1" },
+      { _type: "reference", _ref: categoryIds["homelab"], _key: "c2" },
     ],
     tags: ["self-hosting", "proxmox", "docker", "privacy", "homelab"],
     body: [
