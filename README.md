@@ -138,7 +138,8 @@ When you publish changes in Sanity Studio, the site can automatically rebuild:
 
 1. Go to [sanity.io/manage](https://www.sanity.io/manage) → your project → API → Webhooks
 2. Create a new webhook:
-   - **URL**: `https://your-domain.com/api/revalidate?secret=YOUR_REVALIDATE_SECRET`
+   - **URL**: `https://your-domain.com/api/revalidate`
+   - **HTTP Headers**: Add `x-sanity-webhook-secret: YOUR_REVALIDATE_SECRET`
    - **Trigger on**: Create, Update, Delete
    - **Filter**: Leave empty (triggers on all document changes)
 3. Replace `YOUR_REVALIDATE_SECRET` with the value from your `.env.local`
