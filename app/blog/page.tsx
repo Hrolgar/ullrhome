@@ -26,7 +26,7 @@ export default async function BlogPage() {
   return (
     <>
       <Navbar />
-      <main className="pt-24 pb-16 px-6">
+      <main id="main-content" className="pt-24 pb-16 px-6">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="mb-12">

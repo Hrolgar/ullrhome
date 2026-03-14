@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { getSettings } from "@/sanity/lib/queries";
+import { urlFor } from "@/sanity/lib/image";
 import { settingsToCssVars } from "@/lib/theme";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
@@ -29,6 +30,9 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName,
       title: siteName,
       description,
+      ...(settings?.ogImage && {
+        images: [{ url: urlFor(settings.ogImage).width(1200).height(630).url() }],
+      }),
     },
   };
 }

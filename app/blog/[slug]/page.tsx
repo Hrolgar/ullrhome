@@ -2,11 +2,11 @@ import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import { getPostBySlug, getPostSlugs } from "@/sanity/lib/queries";
+import { portableTextComponents } from "@/lib/portableText";
 import { urlFor } from "@/sanity/lib/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import type { Metadata } from "next";
-import type { PortableTextComponents } from "@portabletext/react";
 
 export const revalidate = 3600;
 
@@ -24,8 +24,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const post = await getPostBySlug(slug);
   if (!post) return { title: "Post Not Found" };
   return {
-    title: `${post.title} | Ullrhome Blog`,
+    title: post.title,
     description: post.excerpt || post.title,
+    keywords: post.tags,
     openGraph: {
       title: post.title,
       description: post.excerpt || post.title,
@@ -38,30 +39,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-const portableTextComponents: PortableTextComponents = {
-  types: {
-    image: ({ value }) => {
-      if (!value?.asset) return null;
-      return (
-        <figure className="my-8">
-          <Image
-            src={urlFor(value).width(800).url()}
-            alt={value.alt || ""}
-            width={800}
-            height={450}
-            className="w-full rounded-lg border border-border"
-          />
-          {value.caption && (
-            <figcaption className="text-center text-sm text-muted mt-3">
-              {value.caption}
-            </figcaption>
-          )}
-        </figure>
-      );
-    },
-  },
-};
-
 function formatDate(dateStr: string): string {
   return new Date(dateStr).toLocaleDateString("en-US", {
     year: "numeric",
@@ -70,17 +47,26 @@ function formatDate(dateStr: string): string {
   });
 }
 
+function estimateReadTime(body: any[]): number {
+  const text = body
+    .filter((b: any) => b._type === "block")
+    .map((b: any) => b.children?.map((c: any) => c.text).join("") || "")
+    .join(" ");
+  return Math.max(1, Math.round(text.split(/\s+/).length / 200));
+}
+
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
   if (!post) notFound();
 
+  const readTime = post.body ? estimateReadTime(post.body) : null;
+
   return (
     <>
       <Navbar />
-      <main className="pt-24 pb-16 px-6">
+      <main id="main-content" className="pt-24 pb-16 px-6">
         <article className="max-w-3xl mx-auto">
-          {/* Back link */}
           <a
             href="/blog"
             className="text-sm text-muted hover:text-primary transition-colors mb-8 inline-block"
@@ -88,21 +74,27 @@ export default async function BlogPostPage({ params }: PageProps) {
             ← Back to blog
           </a>
 
-          {/* Header */}
           <header className="mb-10">
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-3 mb-4 flex-wrap">
               <time className="text-sm text-muted">{formatDate(post.publishedAt)}</time>
+              {readTime && (
+                <>
+                  <span className="text-border">·</span>
+                  <span className="text-sm text-muted">{readTime} min read</span>
+                </>
+              )}
               {post.categories && post.categories.length > 0 && (
                 <>
                   <span className="text-border">·</span>
                   <div className="flex gap-2">
                     {post.categories.map((cat) => (
-                      <span
+                      <a
                         key={cat._id}
-                        className="text-xs bg-surface text-accent px-2.5 py-0.5 rounded-full border border-border"
+                        href={`/blog/category/${cat.slug.current}`}
+                        className="text-xs bg-surface text-accent px-2.5 py-0.5 rounded-full border border-border hover:border-primary transition-colors"
                       >
                         {cat.title}
-                      </span>
+                      </a>
                     ))}
                   </div>
                 </>
@@ -118,7 +110,6 @@ export default async function BlogPostPage({ params }: PageProps) {
             )}
           </header>
 
-          {/* Cover image */}
           {post.coverImage && (
             <div className="mb-10 rounded-xl overflow-hidden border border-border">
               <Image
@@ -132,14 +123,12 @@ export default async function BlogPostPage({ params }: PageProps) {
             </div>
           )}
 
-          {/* Body */}
           {post.body && (
             <div className="prose-dark text-lg leading-relaxed">
               <PortableText value={post.body} components={portableTextComponents} />
             </div>
           )}
 
-          {/* Tags */}
           {post.tags && post.tags.length > 0 && (
             <div className="mt-12 pt-8 border-t border-border">
               <div className="flex flex-wrap gap-2">

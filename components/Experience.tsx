@@ -1,4 +1,5 @@
 import { PortableText } from "@portabletext/react";
+import { portableTextComponents } from "@/lib/portableText";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
@@ -59,7 +60,7 @@ export default function Experience({ experience }: Props) {
 
                 {exp.description && (
                   <div className="text-muted text-sm leading-relaxed prose-dark">
-                    <PortableText value={exp.description} />
+                    <PortableText value={exp.description} components={portableTextComponents} />
                   </div>
                 )}
 

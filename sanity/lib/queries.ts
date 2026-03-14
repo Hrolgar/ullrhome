@@ -32,21 +32,21 @@ export async function getContact(): Promise<ContactInfo | null> {
 // --- Collections ---
 
 export async function getSkills(): Promise<Skill[]> {
-  return client.fetch(
+  return (await client.fetch(
     `*[_type == "skill"] | order(category asc, order asc)`
-  );
+  )) || [];
 }
 
 export async function getExperience(): Promise<Experience[]> {
-  return client.fetch(
+  return (await client.fetch(
     `*[_type == "experience"] | order(startDate desc) { ..., technologies[]-> }`
-  );
+  )) || [];
 }
 
 export async function getProjects(): Promise<Project[]> {
-  return client.fetch(
+  return (await client.fetch(
     `*[_type == "project"] | order(featured desc, order asc) { ..., technologies[]-> }`
-  );
+  )) || [];
 }
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
@@ -57,30 +57,30 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
 }
 
 export async function getProjectSlugs(): Promise<{ slug: { current: string } }[]> {
-  return client.fetch(
+  return (await client.fetch(
     `*[_type == "project" && defined(slug.current)]{ slug }`
-  );
+  )) || [];
 }
 
 // --- Blog ---
 
 export async function getPosts(limit?: number): Promise<Post[]> {
   const limitClause = limit ? `[0...${limit}]` : "";
-  return client.fetch(
+  return (await client.fetch(
     `*[_type == "post"] | order(publishedAt desc) ${limitClause} {
       ...,
       categories[]->,
     }`
-  );
+  )) || [];
 }
 
 export async function getFeaturedPosts(): Promise<Post[]> {
-  return client.fetch(
+  return (await client.fetch(
     `*[_type == "post" && featured == true] | order(publishedAt desc) [0...3] {
       ...,
       categories[]->,
     }`
-  );
+  )) || [];
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
@@ -94,37 +94,39 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 }
 
 export async function getPostSlugs(): Promise<{ slug: { current: string } }[]> {
-  return client.fetch(
+  return (await client.fetch(
     `*[_type == "post" && defined(slug.current)]{ slug }`
-  );
+  )) || [];
 }
 
 export async function getCategories(): Promise<Category[]> {
-  return client.fetch(`*[_type == "category"] | order(title asc)`);
+  return (await client.fetch(
+    `*[_type == "category"] | order(title asc)`
+  )) || [];
 }
 
 export async function getPostsByCategory(categorySlug: string): Promise<Post[]> {
-  return client.fetch(
+  return (await client.fetch(
     `*[_type == "post" && $categorySlug in categories[]->slug.current] | order(publishedAt desc) {
       ...,
       categories[]->,
     }`,
     { categorySlug }
-  );
+  )) || [];
 }
 
 // --- Certifications ---
 
 export async function getCertifications(): Promise<Certification[]> {
-  return client.fetch(
+  return (await client.fetch(
     `*[_type == "certification"] | order(order asc, issueDate desc)`
-  );
+  )) || [];
 }
 
 // --- Homelab ---
 
 export async function getHomelabServices(): Promise<HomelabService[]> {
-  return client.fetch(
+  return (await client.fetch(
     `*[_type == "homelabService"] | order(category asc, order asc)`
-  );
+  )) || [];
 }

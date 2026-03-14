@@ -1,4 +1,5 @@
 import { PortableText } from "@portabletext/react";
+import { portableTextComponents } from "@/lib/portableText";
 import ScrollReveal from "./ScrollReveal";
 import type { About as AboutType } from "@/sanity/types";
 
@@ -18,7 +19,7 @@ export default function About({ about }: Props) {
         </ScrollReveal>
         <ScrollReveal delay={100}>
           <div className="prose-dark leading-relaxed text-lg">
-            <PortableText value={about.body} />
+            <PortableText value={about.body} components={portableTextComponents} />
           </div>
         </ScrollReveal>
       </div>

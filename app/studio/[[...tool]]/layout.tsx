@@ -8,5 +8,17 @@ export default function StudioLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="sanity-studio">{children}</div>;
+  return (
+    <div
+      className="sanity-studio"
+      style={{
+        height: "100vh",
+        maxHeight: "100dvh",
+        overscrollBehavior: "none",
+        WebkitFontSmoothing: "antialiased",
+      }}
+    >
+      {children}
+    </div>
+  );
 }
