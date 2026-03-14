@@ -11,6 +11,16 @@ const colorMap: Record<string, string> = {
   textSecondaryColor: "--color-text-secondary",
 };
 
+/** Extract hex value from either a plain string or a Sanity color object. */
+function extractHex(value: unknown): string | null {
+  if (!value) return null;
+  if (typeof value === "string") return value;
+  if (typeof value === "object" && "hex" in (value as Record<string, unknown>)) {
+    return (value as { hex: string }).hex;
+  }
+  return null;
+}
+
 export function settingsToCssVars(
   settings: SiteSettings | null
 ): CSSProperties {
@@ -19,9 +29,9 @@ export function settingsToCssVars(
   const vars: Record<string, string> = {};
 
   for (const [key, cssVar] of Object.entries(colorMap)) {
-    const value = settings[key as keyof SiteSettings];
-    if (typeof value === "string" && value) {
-      vars[cssVar] = value;
+    const hex = extractHex(settings[key as keyof SiteSettings]);
+    if (hex) {
+      vars[cssVar] = hex;
     }
   }
 

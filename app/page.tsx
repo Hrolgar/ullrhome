@@ -19,6 +19,7 @@ import Homelab from "@/components/Homelab";
 import BlogPreview from "@/components/BlogPreview";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import BackToTop from "@/components/BackToTop";
 
 export const revalidate = 3600;
 
@@ -38,7 +39,7 @@ export default async function Home() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main-content">
         <Hero about={about} />
         <About about={about} />
         <Skills skills={skills} />
@@ -50,6 +51,7 @@ export default async function Home() {
         <Contact contact={contact} />
       </main>
       <Footer />
+      <BackToTop />
     </>
   );
 }

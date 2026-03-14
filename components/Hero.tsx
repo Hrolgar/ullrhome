@@ -62,21 +62,25 @@ export default function Hero({ about }: Props) {
           </div>
         </div>
 
-        {about?.profileImage && (
-          <div className="flex-shrink-0 animate-fade-in-up animate-delay-200">
-            <div className="relative">
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-full blur opacity-30" />
+        <div className="flex-shrink-0 animate-fade-in-up animate-delay-200">
+          <div className="relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-full blur opacity-30" />
+            {about?.profileImage ? (
               <Image
                 src={urlFor(about.profileImage).width(350).height(350).url()}
-                alt="Profile"
+                alt={about?.heading || "Profile"}
                 width={350}
                 height={350}
                 className="relative rounded-full border-2 border-border"
                 priority
               />
-            </div>
+            ) : (
+              <div className="relative w-[350px] h-[350px] rounded-full border-2 border-border bg-surface flex items-center justify-center">
+                <span className="text-6xl text-muted/30">?</span>
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </section>
   );
