@@ -1,12 +1,13 @@
 import type { MetadataRoute } from "next";
-import { getProjectSlugs, getPostSlugs } from "@/sanity/lib/queries";
+import { getProjectSlugs, getPostSlugs, getCategories } from "@/sanity/lib/queries";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ullrhome.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [projectSlugs, postSlugs] = await Promise.all([
+  const [projectSlugs, postSlugs, categories] = await Promise.all([
     getProjectSlugs(),
     getPostSlugs(),
+    getCategories(),
   ]);
 
   const staticPages: MetadataRoute.Sitemap = [
@@ -28,5 +29,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...projectPages, ...postPages];
+  const categoryPages: MetadataRoute.Sitemap = categories.map((c) => ({
+    url: `${baseUrl}/blog/category/${c.slug.current}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.5,
+  }));
+
+  return [...staticPages, ...projectPages, ...postPages, ...categoryPages];
 }

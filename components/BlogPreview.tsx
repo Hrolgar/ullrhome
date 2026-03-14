@@ -42,6 +42,7 @@ export default function BlogPreview({ posts }: Props) {
               <a
                 href={`/blog/${post.slug.current}`}
                 className="group block bg-bg rounded-xl overflow-hidden border border-border card-glow h-full"
+                aria-label={`Read: ${post.title}`}
               >
                 {post.coverImage && (
                   <div className="overflow-hidden aspect-video">

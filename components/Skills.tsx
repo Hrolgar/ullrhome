@@ -64,7 +64,14 @@ export default function Skills({ skills }: Props) {
                       )}
                     </div>
                     {skill.proficiency && (
-                      <div className="h-1 bg-bg rounded-full overflow-hidden">
+                      <div
+                        className="h-1 bg-bg rounded-full overflow-hidden"
+                        role="progressbar"
+                        aria-label={`${skill.name} proficiency`}
+                        aria-valuenow={skill.proficiency}
+                        aria-valuemin={1}
+                        aria-valuemax={5}
+                      >
                         <div
                           className="h-full bg-gradient-to-r from-primary to-secondary rounded-full proficiency-bar"
                           style={{ "--bar-width": `${(skill.proficiency / 5) * 100}%` } as React.CSSProperties}

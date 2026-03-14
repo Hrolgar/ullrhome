@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
+import { portableTextComponents } from "@/lib/portableText";
 import Image from "next/image";
 import { getProjectBySlug, getProjectSlugs } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
@@ -22,12 +23,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const project = await getProjectBySlug(slug);
   if (!project) return { title: "Project Not Found" };
+  const description = project.summary || `${project.title} — project by Hrolgar`;
   return {
-    title: `${project.title} | Ullrhome`,
-    description: project.summary || `${project.title} — project by Hrolgar`,
-    openGraph: project.image
-      ? { images: [{ url: urlFor(project.image).width(1200).height(630).url() }] }
-      : undefined,
+    title: project.title,
+    description,
+    openGraph: {
+      type: "website",
+      title: project.title,
+      description,
+      ...(project.image && {
+        images: [{ url: urlFor(project.image).width(1200).height(630).url() }],
+      }),
+    },
   };
 }
 
@@ -113,7 +120,7 @@ export default async function ProjectPage({ params }: PageProps) {
           {/* Body */}
           {project.description && (
             <div className="prose-dark text-lg leading-relaxed">
-              <PortableText value={project.description} />
+              <PortableText value={project.description} components={portableTextComponents} />
             </div>
           )}
         </article>
