@@ -65,18 +65,18 @@ async function seed() {
     _id: "about",
     _type: "about",
     heading: "Hrolgar",
-    tagline: "Software developer and self-hosting enthusiast from Norway",
+    tagline: "System developer and self-hosting enthusiast from Norway",
     roles: [
-      ".NET Developer",
+      "Senior System Developer",
       "Infrastructure Tinkerer",
       "Self-Hosting Enthusiast",
     ],
     body: [
       block(
-        "I build financial software at SpareBank 1 in Norway. Day job is .NET — C#, ASP.NET Core, SQL Server — the kind of stack where you test everything twice because the code handles real money. It's taught me to value systems that actually work over systems that look impressive in a slide deck."
+        "I'm a system developer and partner at XLENT Ålesund, building full-stack solutions with C#/.NET, Blazor, and Microsoft Azure. My work ranges from CRM integrations and ERP systems to secure member portals — the kind of projects where clean architecture and solid data flows matter more than flashy demos."
       ),
       block(
-        "After hours I run a homelab that's probably more infrastructure than one person needs. Proxmox cluster, a dozen Docker stacks, GitLab, Authentik for SSO, Cloudflare tunnels — the whole thing managed with OpenTofu. My current obsession is Hrolbot: an AI agent system running on a VM in the lab, where autonomous Claude Code agents coordinate through a message mesh to write and review code. It works better than it has any right to."
+        "Outside of client work I run a homelab that's probably more infrastructure than one person needs. Proxmox cluster, a dozen Docker stacks, GitLab, Authentik for SSO, Cloudflare tunnels — the whole thing managed with OpenTofu. My current obsession is Hrolbot: an AI agent system running on a VM in the lab, where autonomous Claude Code agents coordinate through a message mesh to write and review code. It works better than it has any right to."
       ),
     ],
   });
@@ -86,6 +86,7 @@ async function seed() {
   await client.createOrReplace({
     _id: "contactInfo",
     _type: "contactInfo",
+    email: "helgiskafta@proton.me",
     github: "https://github.com/Hrolgar",
     location: "Ålesund, Norway",
     availableForWork: false,
@@ -147,19 +148,70 @@ async function seed() {
 
   // --- Experience ---
   console.log("Creating experience...");
+
+  // Clean up old experience entries
+  try { await client.delete("exp-sparebank1"); } catch { /* may not exist */ }
+
   await client.createOrReplace({
-    _id: "exp-sparebank1",
+    _id: "exp-xlent",
     _type: "experience",
-    company: "SpareBank 1",
-    role: "Software Developer",
+    company: "XLENT Ålesund AS",
+    role: "Senior System Developer & Partner",
     location: "Ålesund, Norway",
-    startDate: "2023-01-01",
+    startDate: "2023-08-01",
     description: [
       block(
-        "Full-stack development on financial applications in the Norwegian banking sector. Primarily .NET — building APIs, integrating payment systems, and maintaining the kind of software where bugs have consequences."
+        "Full-stack solutions with C#/.NET, Blazor, and Microsoft Azure. CRM integrations, ERP systems, and secure member portals for clients including 62°Nord Hotel & Adventures and Reisegarantifondet. Data integrations via Azure Service Bus and Dynamics 365, authentication with Duende, cloud storage with Cosmos DB and Blob Storage."
       ),
     ],
     order: 1,
+  });
+
+  await client.createOrReplace({
+    _id: "exp-leba",
+    _type: "experience",
+    company: "LEBA AS",
+    role: "Software Developer",
+    location: "Ålesund, Norway",
+    startDate: "2021-01-01",
+    endDate: "2023-06-01",
+    description: [
+      block(
+        "Built the company website and custom in-house ERP, CMS, and CRM systems from scratch."
+      ),
+    ],
+    order: 2,
+  });
+
+  await client.createOrReplace({
+    _id: "exp-freelance",
+    _type: "experience",
+    company: "Helgi Skaftason Consulting",
+    role: "Freelance Developer",
+    location: "Ålesund, Norway",
+    startDate: "2017-07-01",
+    description: [
+      block(
+        "Apps, websites, and software for national and international businesses. Everything from invoicing systems to full web applications."
+      ),
+    ],
+    order: 3,
+  });
+
+  await client.createOrReplace({
+    _id: "exp-restaurant",
+    _type: "experience",
+    company: "Ålesund Restaurant & Bar",
+    role: "Owner & Manager",
+    location: "Ålesund, Norway",
+    startDate: "2014-01-01",
+    endDate: "2016-02-01",
+    description: [
+      block(
+        "Owned and managed a pub and live music venue. Staff leadership, financial management, event coordination, and business development."
+      ),
+    ],
+    order: 4,
   });
 
   // --- Categories ---
