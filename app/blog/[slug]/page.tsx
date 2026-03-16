@@ -91,7 +91,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                       <a
                         key={cat._id}
                         href={`/blog/category/${cat.slug.current}`}
-                        className="text-xs bg-surface text-accent px-2.5 py-0.5 rounded-full border border-border hover:border-primary transition-colors"
+                        className="text-xs bg-surface text-muted px-2.5 py-0.5 rounded border border-border hover:border-primary transition-colors"
                       >
                         {cat.title}
                       </a>
@@ -101,7 +101,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               )}
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+            <h1 className="font-[family-name:var(--font-serif)] text-4xl md:text-5xl font-bold mb-4 leading-tight text-foreground">
               {post.title}
             </h1>
 
@@ -111,7 +111,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </header>
 
           {post.coverImage && (
-            <div className="mb-10 rounded-xl overflow-hidden border border-border">
+            <div className="mb-10 rounded overflow-hidden border border-border">
               <Image
                 src={urlFor(post.coverImage).width(1200).height(630).url()}
                 alt={post.title}
@@ -124,7 +124,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           )}
 
           {post.body && (
-            <div className="prose-dark text-lg leading-relaxed">
+            <div className="prose-editorial text-base leading-relaxed">
               <PortableText value={post.body} components={portableTextComponents} />
             </div>
           )}
@@ -135,7 +135,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 {post.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-xs bg-surface text-muted px-3 py-1.5 rounded-full border border-border"
+                    className="text-xs bg-surface text-muted px-3 py-1.5 rounded border border-border"
                   >
                     #{tag}
                   </span>

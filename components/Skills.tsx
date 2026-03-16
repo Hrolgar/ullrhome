@@ -28,57 +28,35 @@ export default function Skills({ skills }: Props) {
   }, {});
 
   return (
-    <section id="skills" className="py-24 px-6 bg-surface/50">
-      <div className="max-w-6xl mx-auto">
+    <section id="skills" className="py-20 md:py-28 px-6">
+      <div className="max-w-5xl mx-auto">
         <ScrollReveal>
-          <h2 className="text-3xl font-bold mb-2 gradient-text inline-block">Skills</h2>
-          <div className="w-16 h-1 bg-primary rounded mb-12" />
+          <h2 className="font-[family-name:var(--font-serif)] text-4xl md:text-5xl font-bold text-foreground mb-12">Skills</h2>
         </ScrollReveal>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
           {Object.entries(categories).map(([category, items], catIndex) => (
-            <ScrollReveal key={category} delay={catIndex * 100}>
-              <h3 className="text-lg font-semibold mb-4 text-foreground">
+            <ScrollReveal key={category} delay={catIndex > 2 ? 100 : 0}>
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-muted mb-3">
                 {categoryLabels[category] || category}
               </h3>
-              <div className="space-y-3">
+              <div className="flex flex-wrap gap-2">
                 {items.map((skill) => (
-                  <div key={skill._id} className="group">
-                    <div className="flex items-center gap-3 mb-1">
-                      {skill.icon && (
-                        <Image
-                          src={urlFor(skill.icon).width(20).height(20).url()}
-                          alt={skill.name}
-                          width={20}
-                          height={20}
-                          className="opacity-70 group-hover:opacity-100 transition-opacity"
-                        />
-                      )}
-                      <span className="text-sm text-muted group-hover:text-foreground transition-colors">
-                        {skill.name}
-                      </span>
-                      {skill.proficiency && (
-                        <span className="ml-auto text-xs text-muted">
-                          {skill.proficiency}/5
-                        </span>
-                      )}
-                    </div>
-                    {skill.proficiency && (
-                      <div
-                        className="h-1 bg-bg rounded-full overflow-hidden"
-                        role="progressbar"
-                        aria-label={`${skill.name} proficiency`}
-                        aria-valuenow={skill.proficiency}
-                        aria-valuemin={1}
-                        aria-valuemax={5}
-                      >
-                        <div
-                          className="h-full bg-gradient-to-r from-primary to-secondary rounded-full proficiency-bar"
-                          style={{ "--bar-width": `${(skill.proficiency / 5) * 100}%` } as React.CSSProperties}
-                        />
-                      </div>
+                  <span
+                    key={skill._id}
+                    className="inline-flex items-center gap-1.5 text-sm bg-surface px-3 py-1.5 rounded text-foreground border border-border"
+                  >
+                    {skill.icon && (
+                      <Image
+                        src={urlFor(skill.icon).width(16).height(16).url()}
+                        alt=""
+                        width={16}
+                        height={16}
+                        className="opacity-70"
+                      />
                     )}
-                  </div>
+                    {skill.name}
+                  </span>
                 ))}
               </div>
             </ScrollReveal>

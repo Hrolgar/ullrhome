@@ -27,21 +27,19 @@ export default async function BlogPage() {
     <>
       <Navbar />
       <main id="main-content" className="pt-24 pb-16 px-6">
-        <div className="max-w-6xl mx-auto">
-          {/* Header */}
+        <div className="max-w-5xl mx-auto">
           <div className="mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">Blog</h1>
-            <p className="text-muted text-lg">
+            <h1 className="font-[family-name:var(--font-serif)] text-4xl md:text-5xl font-bold text-foreground mb-4">Blog</h1>
+            <p className="text-muted text-base">
               Thoughts on development, homelab, and technology
             </p>
           </div>
 
-          {/* Category filters */}
           {categories.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-10">
               <a
                 href="/blog"
-                className="text-xs bg-primary/20 text-primary px-3 py-1.5 rounded-full font-medium"
+                className="text-xs bg-primary/15 text-primary px-3 py-1.5 rounded font-medium"
                 aria-current="page"
               >
                 All
@@ -50,7 +48,7 @@ export default async function BlogPage() {
                 <a
                   key={cat._id}
                   href={`/blog/category/${cat.slug.current}`}
-                  className="text-xs bg-surface text-muted px-3 py-1.5 rounded-full border border-border hover:text-foreground hover:border-primary transition-all"
+                  className="text-xs bg-surface text-muted px-3 py-1.5 rounded border border-border hover:text-foreground hover:border-primary transition-all"
                 >
                   {cat.title}
                 </a>
@@ -58,10 +56,9 @@ export default async function BlogPage() {
             </div>
           )}
 
-          {/* Posts grid */}
           {posts.length === 0 ? (
             <div className="text-center py-20">
-              <p className="text-muted text-lg">No posts yet. Check back soon.</p>
+              <p className="text-muted text-base">No posts yet. Check back soon.</p>
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -69,7 +66,7 @@ export default async function BlogPage() {
                 <a
                   key={post._id}
                   href={`/blog/${post.slug.current}`}
-                  className="group block bg-surface rounded-xl overflow-hidden border border-border card-glow"
+                  className="group block bg-surface rounded overflow-hidden border border-border hover:border-primary transition-colors"
                   aria-label={`Read: ${post.title}`}
                 >
                   {post.coverImage && (
@@ -79,7 +76,7 @@ export default async function BlogPage() {
                         alt={post.title}
                         width={400}
                         height={225}
-                        className="w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="w-full object-cover group-hover:scale-102 transition-transform duration-300"
                       />
                     </div>
                   )}
@@ -89,12 +86,12 @@ export default async function BlogPage() {
                         {formatDate(post.publishedAt)}
                       </time>
                       {post.featured && (
-                        <span className="text-[10px] bg-primary/20 text-primary px-2 py-0.5 rounded-full">
+                        <span className="text-[10px] bg-accent/15 text-accent px-2 py-0.5 rounded font-medium">
                           Featured
                         </span>
                       )}
                     </div>
-                    <h2 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
+                    <h2 className="font-[family-name:var(--font-serif)] text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
                       {post.title}
                     </h2>
                     {post.excerpt && (

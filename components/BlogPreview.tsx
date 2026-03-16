@@ -19,17 +19,14 @@ export default function BlogPreview({ posts }: Props) {
   if (!posts?.length) return null;
 
   return (
-    <section id="blog" className="py-24 px-6 bg-surface/50">
-      <div className="max-w-6xl mx-auto">
+    <section id="blog" className="py-20 md:py-28 px-6 border-t border-border">
+      <div className="max-w-5xl mx-auto">
         <ScrollReveal>
           <div className="flex items-end justify-between mb-12">
-            <div>
-              <h2 className="text-3xl font-bold mb-2 gradient-text inline-block">Blog</h2>
-              <div className="w-16 h-1 bg-primary rounded" />
-            </div>
+            <h2 className="font-[family-name:var(--font-serif)] text-4xl md:text-5xl font-bold text-foreground">Blog</h2>
             <a
               href="/blog"
-              className="text-sm text-primary hover:text-foreground transition-colors font-medium"
+              className="text-sm text-primary hover:text-secondary transition-colors font-medium"
             >
               View all posts →
             </a>
@@ -38,10 +35,10 @@ export default function BlogPreview({ posts }: Props) {
 
         <div className="grid md:grid-cols-3 gap-6">
           {posts.map((post, index) => (
-            <ScrollReveal key={post._id} delay={index * 100}>
+            <ScrollReveal key={post._id} delay={index > 0 ? 100 : 0}>
               <a
                 href={`/blog/${post.slug.current}`}
-                className="group block bg-bg rounded-xl overflow-hidden border border-border card-glow h-full"
+                className="group block bg-surface rounded overflow-hidden border border-border hover:border-primary transition-colors h-full"
                 aria-label={`Read: ${post.title}`}
               >
                 {post.coverImage && (
@@ -51,13 +48,13 @@ export default function BlogPreview({ posts }: Props) {
                       alt={post.title}
                       width={400}
                       height={225}
-                      className="w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full object-cover group-hover:scale-102 transition-transform duration-300"
                     />
                   </div>
                 )}
                 <div className="p-5">
                   <time className="text-xs text-muted" dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
-                  <h3 className="text-lg font-semibold mt-2 mb-2 group-hover:text-primary transition-colors">
+                  <h3 className="font-[family-name:var(--font-serif)] text-lg font-semibold mt-2 mb-2 group-hover:text-primary transition-colors">
                     {post.title}
                   </h3>
                   {post.excerpt && (
@@ -68,7 +65,7 @@ export default function BlogPreview({ posts }: Props) {
                       {post.categories.map((cat) => (
                         <span
                           key={cat._id}
-                          className="text-[10px] bg-surface text-accent px-2 py-0.5 rounded-full border border-border"
+                          className="text-[10px] bg-bg text-muted px-2 py-0.5 rounded"
                         >
                           {cat.title}
                         </span>

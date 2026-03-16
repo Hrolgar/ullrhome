@@ -19,16 +19,15 @@ export default function Contact({ contact }: Props) {
   ].filter((s) => s.url);
 
   return (
-    <section id="contact" className="py-24 px-6">
-      <div className="max-w-4xl mx-auto text-center">
+    <section id="contact" className="py-20 md:py-28 px-6 border-t border-border">
+      <div className="max-w-3xl mx-auto text-center">
         <ScrollReveal>
-          <h2 className="text-3xl font-bold mb-2 gradient-text inline-block">Get in Touch</h2>
-          <div className="w-16 h-1 bg-primary rounded mb-8 mx-auto" />
+          <h2 className="font-[family-name:var(--font-serif)] text-4xl md:text-5xl font-bold text-foreground mb-8">Get in Touch</h2>
         </ScrollReveal>
 
         <ScrollReveal delay={100}>
           {contact.availableForWork && (
-            <div className="inline-flex items-center gap-2 bg-accent/10 text-accent px-4 py-2 rounded-full mb-8 text-sm font-medium">
+            <div className="inline-flex items-center gap-2 bg-accent/10 text-accent px-4 py-2 rounded mb-8 text-sm font-medium">
               <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
               Available for new opportunities
             </div>
@@ -44,17 +43,17 @@ export default function Contact({ contact }: Props) {
           )}
 
           {socials.length > 0 && (
-            <div className="flex justify-center gap-4 mb-8">
+            <div className="flex justify-center gap-6 mb-8">
               {socials.map((social) => (
                 <a
                   key={social.key}
                   href={social.url!}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 flex items-center justify-center rounded-lg border border-border text-muted hover:text-foreground hover:border-primary transition-all card-glow"
+                  className="text-muted hover:text-primary transition-colors"
                   aria-label={social.label}
                 >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path d={socialIcons[social.key]} />
                   </svg>
                 </a>

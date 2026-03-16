@@ -18,17 +18,16 @@ export default function Certifications({ certifications }: Props) {
   if (!certifications?.length) return null;
 
   return (
-    <section id="certifications" className="py-24 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section id="certifications" className="py-20 md:py-28 px-6 border-t border-border">
+      <div className="max-w-5xl mx-auto">
         <ScrollReveal>
-          <h2 className="text-3xl font-bold mb-2 gradient-text inline-block">Certifications</h2>
-          <div className="w-16 h-1 bg-primary rounded mb-12" />
+          <h2 className="font-[family-name:var(--font-serif)] text-4xl md:text-5xl font-bold text-foreground mb-12">Certifications</h2>
         </ScrollReveal>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {certifications.map((cert, index) => (
-            <ScrollReveal key={cert._id} delay={index * 100}>
-              <div className="bg-surface rounded-xl p-6 border border-border card-glow h-full flex flex-col">
+            <ScrollReveal key={cert._id} delay={index > 2 ? 100 : 0}>
+              <div className="bg-surface rounded p-6 border border-border hover:border-primary transition-colors h-full flex flex-col">
                 <div className="flex items-start gap-4 mb-4">
                   {cert.badge && (
                     <Image

@@ -11,17 +11,18 @@ export default function About({ about }: Props) {
   if (!about?.body) return null;
 
   return (
-    <section id="about" className="py-24 px-6">
-      <div className="max-w-4xl mx-auto">
-        <ScrollReveal>
-          <h2 className="text-3xl font-bold mb-2 gradient-text inline-block">About Me</h2>
-          <div className="w-16 h-1 bg-primary rounded mb-8" />
-        </ScrollReveal>
-        <ScrollReveal delay={100}>
-          <div className="prose-dark leading-relaxed text-lg">
-            <PortableText value={about.body} components={portableTextComponents} />
-          </div>
-        </ScrollReveal>
+    <section id="about" className="py-20 md:py-28 px-6">
+      <div className="max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-[200px_1fr] gap-8 md:gap-16">
+          <ScrollReveal>
+            <h2 className="font-[family-name:var(--font-serif)] text-4xl md:text-5xl font-bold text-foreground">About</h2>
+          </ScrollReveal>
+          <ScrollReveal delay={100}>
+            <div className="prose-editorial leading-relaxed text-base">
+              <PortableText value={about.body} components={portableTextComponents} />
+            </div>
+          </ScrollReveal>
+        </div>
       </div>
     </section>
   );

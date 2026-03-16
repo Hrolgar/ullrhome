@@ -1,14 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { DM_Sans, Fraunces, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { getSettings } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import { settingsToCssVars } from "@/lib/theme";
 
-const inter = Inter({ subsets: ["latin"], display: "swap" });
+const dmSans = DM_Sans({ subsets: ["latin"], display: "swap", variable: "--font-sans" });
+const fraunces = Fraunces({ subsets: ["latin"], display: "swap", variable: "--font-serif" });
+const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], display: "swap", variable: "--font-mono" });
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0f",
+  themeColor: "#f5f0eb",
   width: "device-width",
   initialScale: 1,
 };
@@ -49,8 +51,8 @@ export default async function RootLayout({
   const cssVars = settingsToCssVars(settings);
 
   return (
-    <html lang="en" style={cssVars} className="antialiased">
-      <body className={`${inter.className} bg-bg text-foreground min-h-screen`}>
+    <html lang="en" style={cssVars} className={`${dmSans.variable} ${fraunces.variable} ${jetbrainsMono.variable} antialiased`}>
+      <body className="font-[family-name:var(--font-sans)] bg-bg text-foreground min-h-screen">
         {children}
       </body>
     </html>
