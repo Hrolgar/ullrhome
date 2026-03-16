@@ -1,4 +1,5 @@
 import { createClient } from "@sanity/client";
+import { randomUUID } from "crypto";
 
 const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -12,11 +13,11 @@ function block(text: string) {
   return {
     _type: "block",
     style: "normal",
-    _key: crypto.randomUUID().slice(0, 8),
+    _key: randomUUID().slice(0, 8),
     children: [
       {
         _type: "span",
-        _key: crypto.randomUUID().slice(0, 8),
+        _key: randomUUID().slice(0, 8),
         text,
         marks: [],
       },
