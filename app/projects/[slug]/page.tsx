@@ -47,7 +47,7 @@ export default async function ProjectPage({ params }: PageProps) {
     <>
       <Navbar />
       <main id="main-content" className="pt-24 pb-16 px-6">
-        <article className="max-w-4xl mx-auto">
+        <article className="max-w-5xl mx-auto">
           {/* Back link */}
           <a
             href="/#projects"
@@ -57,7 +57,7 @@ export default async function ProjectPage({ params }: PageProps) {
           </a>
 
           {/* Header */}
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
+          <h1 className="font-[family-name:var(--font-serif)] text-4xl md:text-5xl font-bold mb-4 text-foreground">
             {project.title}
           </h1>
 
@@ -72,7 +72,7 @@ export default async function ProjectPage({ params }: PageProps) {
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 bg-surface border border-border rounded-lg text-sm text-muted hover:text-foreground hover:border-primary transition-all"
+                className="px-4 py-2 bg-surface border border-border rounded text-sm text-muted hover:text-foreground hover:border-primary transition-all"
               >
                 View on GitHub
               </a>
@@ -82,7 +82,7 @@ export default async function ProjectPage({ params }: PageProps) {
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 bg-primary text-white rounded-lg text-sm hover:opacity-90 transition-opacity"
+                className="px-4 py-2 bg-primary text-white rounded text-sm hover:opacity-90 transition-opacity"
               >
                 Live Demo
               </a>
@@ -95,7 +95,7 @@ export default async function ProjectPage({ params }: PageProps) {
               {project.technologies.map((tech) => (
                 <span
                   key={tech._id}
-                  className="text-xs bg-surface px-3 py-1.5 rounded-full text-accent border border-border"
+                  className="text-xs bg-surface px-3 py-1.5 rounded text-accent border border-border"
                 >
                   {tech.name}
                 </span>
@@ -105,7 +105,7 @@ export default async function ProjectPage({ params }: PageProps) {
 
           {/* Cover image */}
           {project.image && (
-            <div className="mb-10 rounded-xl overflow-hidden border border-border">
+            <div className="mb-10 rounded overflow-hidden border border-border">
               <Image
                 src={urlFor(project.image).width(1200).height(630).url()}
                 alt={project.title}
@@ -119,7 +119,7 @@ export default async function ProjectPage({ params }: PageProps) {
 
           {/* Body */}
           {project.description && (
-            <div className="prose-dark text-lg leading-relaxed">
+            <div className="prose-editorial max-w-3xl text-lg leading-relaxed">
               <PortableText value={project.description} components={portableTextComponents} />
             </div>
           )}

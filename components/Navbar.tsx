@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback } from "react";
 
 const sections = [
   { label: "About", href: "/#about", id: "about" },
-  { label: "Skills", href: "/#skills", id: "skills" },
   { label: "Experience", href: "/#experience", id: "experience" },
   { label: "Projects", href: "/#projects", id: "projects" },
   { label: "Blog", href: "/blog", id: null },
@@ -20,7 +19,6 @@ export default function Navbar() {
     const onScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      // Find which section is currently in view
       const sectionIds = sections.filter((s) => s.id).map((s) => s.id!);
       let current = "";
       for (const id of sectionIds) {
@@ -62,12 +60,12 @@ export default function Navbar() {
         aria-label="Main navigation"
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-bg/95 backdrop-blur-md border-b border-border shadow-lg"
+            ? "bg-bg/95 backdrop-blur-md border-b border-border"
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-          <a href="/" className="text-xl font-bold gradient-text">
+        <div className="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+          <a href="/" className="font-[family-name:var(--font-serif)] text-xl font-semibold text-foreground">
             Ullrhome
           </a>
 
@@ -76,9 +74,9 @@ export default function Navbar() {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className={`text-sm font-medium transition-colors ${
+                  className={`text-sm font-medium transition-colors relative ${
                     activeSection === link.id
-                      ? "text-primary"
+                      ? "text-primary after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-primary after:rounded"
                       : "text-muted hover:text-foreground"
                   }`}
                 >

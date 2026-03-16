@@ -1,6 +1,5 @@
 const navLinks = [
   { label: "About", href: "/#about" },
-  { label: "Skills", href: "/#skills" },
   { label: "Experience", href: "/#experience" },
   { label: "Projects", href: "/#projects" },
   { label: "Blog", href: "/blog" },
@@ -9,14 +8,12 @@ const navLinks = [
 
 export default function Footer() {
   return (
-    <footer className="py-12 px-6 border-t border-border bg-surface/30">
-      <div className="max-w-6xl mx-auto">
+    <footer className="py-12 px-6 border-t border-border">
+      <div className="max-w-5xl mx-auto">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-8">
-          <div>
-            <a href="/" className="text-lg font-bold gradient-text">
-              Ullrhome
-            </a>
-          </div>
+          <a href="/" className="font-[family-name:var(--font-serif)] text-lg font-semibold text-foreground">
+            Ullrhome
+          </a>
           <nav aria-label="Footer navigation">
             <ul className="flex flex-wrap gap-x-6 gap-y-2">
               {navLinks.map((link) => (

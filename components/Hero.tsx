@@ -1,6 +1,5 @@
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
-import HeroTyping from "./HeroClient";
 import type { About } from "@/sanity/types";
 
 interface Props {
@@ -9,43 +8,34 @@ interface Props {
 
 export default function Hero({ about }: Props) {
   const roles = about?.roles || [];
+  const tagline = roles.length > 0 ? roles[0] : "Developer, homelab enthusiast, and builder of things.";
 
   return (
-    <section className="min-h-screen flex items-center justify-center pt-20 px-6 relative overflow-hidden">
-      {/* Subtle gradient background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
-      </div>
-
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 relative z-10">
+    <section className="pt-32 pb-20 md:pt-40 md:pb-28 px-6">
+      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-12 md:gap-16">
         <div className="flex-1 text-center md:text-left animate-fade-in-up">
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 leading-tight">
-            <span className="gradient-text">
-              {about?.heading || "Hello, I'm Hrolgar"}
-            </span>
+          <h1 className="font-[family-name:var(--font-serif)] text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight text-foreground">
+            {about?.heading || "Hello, I'm Hrolgar"}
           </h1>
 
-          {roles.length > 0 && (
-            <p className="text-2xl md:text-3xl mb-6 h-10">
-              <HeroTyping roles={roles} />
-            </p>
-          )}
-
-          <p className="text-lg text-muted max-w-xl mb-8 animate-fade-in-up animate-delay-200">
-            {about?.tagline || "Developer, homelab enthusiast, and builder of things."}
+          <p className="text-lg md:text-xl text-muted mb-6">
+            {tagline}
           </p>
 
-          <div className="flex gap-4 justify-center md:justify-start animate-fade-in-up animate-delay-300">
+          <p className="text-base text-muted max-w-xl mb-8 animate-fade-in-up animate-delay-100">
+            {about?.tagline || "Building things that matter with code, curiosity, and a homelab."}
+          </p>
+
+          <div className="flex gap-4 justify-center md:justify-start animate-fade-in-up animate-delay-100">
             <a
               href="#projects"
-              className="px-6 py-3 bg-primary text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
+              className="px-6 py-3 bg-primary text-white rounded font-medium hover:bg-secondary transition-colors"
             >
               View Projects
             </a>
             <a
               href="#contact"
-              className="px-6 py-3 border border-border rounded-lg font-medium text-muted hover:text-foreground hover:border-primary transition-colors"
+              className="px-6 py-3 border border-primary text-primary rounded font-medium hover:bg-primary hover:text-white transition-colors"
             >
               Get in Touch
             </a>
@@ -54,7 +44,7 @@ export default function Hero({ about }: Props) {
                 href={about.resumeFile.asset.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3 border border-border rounded-lg font-medium text-muted hover:text-foreground hover:border-accent transition-colors"
+                className="px-6 py-3 border border-border rounded font-medium text-muted hover:text-foreground hover:border-foreground transition-colors"
               >
                 Resume
               </a>
@@ -62,24 +52,21 @@ export default function Hero({ about }: Props) {
           </div>
         </div>
 
-        <div className="flex-shrink-0 animate-fade-in-up animate-delay-200">
-          <div className="relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-full blur opacity-30" />
-            {about?.profileImage ? (
-              <Image
-                src={urlFor(about.profileImage).width(350).height(350).url()}
-                alt={about?.heading || "Profile"}
-                width={350}
-                height={350}
-                className="relative rounded-full border-2 border-border"
-                priority
-              />
-            ) : (
-              <div className="relative w-[350px] h-[350px] rounded-full border-2 border-border bg-surface flex items-center justify-center">
-                <span className="text-6xl text-muted/30">?</span>
-              </div>
-            )}
-          </div>
+        <div className="flex-shrink-0 animate-fade-in-up animate-delay-100">
+          {about?.profileImage ? (
+            <Image
+              src={urlFor(about.profileImage).width(320).height(380).url()}
+              alt={about?.heading || "Profile"}
+              width={320}
+              height={380}
+              className="rounded object-cover border border-border"
+              priority
+            />
+          ) : (
+            <div className="w-[320px] h-[380px] rounded border border-border bg-surface flex items-center justify-center">
+              <span className="text-6xl text-muted/30">?</span>
+            </div>
+          )}
         </div>
       </div>
     </section>

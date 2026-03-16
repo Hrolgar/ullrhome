@@ -14,7 +14,7 @@ export const portableTextComponents: PortableTextComponents = {
             width={800}
             height={450}
             loading="lazy"
-            className="w-full rounded-lg border border-border"
+            className="w-full rounded border border-border"
           />
           {value.caption && (
             <figcaption className="text-center text-sm text-muted mt-3">
@@ -27,11 +27,11 @@ export const portableTextComponents: PortableTextComponents = {
     code: ({ value }) => {
       if (!value?.code) return null;
       return (
-        <pre className="my-6 p-4 bg-surface border border-border rounded-lg overflow-x-auto">
+        <pre className="my-6 p-4 bg-surface border border-border rounded overflow-x-auto">
           {value.language && (
-            <div className="text-xs text-muted mb-2 font-mono">{value.language}</div>
+            <div className="text-xs text-muted mb-2 font-[family-name:var(--font-mono)]">{value.language}</div>
           )}
-          <code className="text-sm font-mono text-foreground">{value.code}</code>
+          <code className="text-sm font-[family-name:var(--font-mono)] text-foreground">{value.code}</code>
         </pre>
       );
     },
@@ -48,20 +48,20 @@ export const portableTextComponents: PortableTextComponents = {
       </a>
     ),
     code: ({ children }) => (
-      <code className="text-accent bg-surface px-1.5 py-0.5 rounded text-[0.9em] font-mono">
+      <code className="text-accent bg-surface px-1.5 py-0.5 rounded text-[0.9em] font-[family-name:var(--font-mono)]">
         {children}
       </code>
     ),
   },
   block: {
     h2: ({ children }) => (
-      <h2 className="text-2xl font-bold text-foreground mt-10 mb-4">{children}</h2>
+      <h2 className="font-[family-name:var(--font-serif)] text-2xl font-bold text-foreground mt-10 mb-4">{children}</h2>
     ),
     h3: ({ children }) => (
-      <h3 className="text-xl font-semibold text-foreground mt-8 mb-3">{children}</h3>
+      <h3 className="font-[family-name:var(--font-serif)] text-xl font-semibold text-foreground mt-8 mb-3">{children}</h3>
     ),
     h4: ({ children }) => (
-      <h4 className="text-lg font-semibold text-foreground mt-6 mb-2">{children}</h4>
+      <h4 className="font-[family-name:var(--font-serif)] text-lg font-semibold text-foreground mt-6 mb-2">{children}</h4>
     ),
     blockquote: ({ children }) => (
       <blockquote className="border-l-4 border-primary pl-4 my-6 italic text-muted">

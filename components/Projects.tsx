@@ -11,17 +11,16 @@ export default function Projects({ projects }: Props) {
   if (!projects?.length) return null;
 
   return (
-    <section id="projects" className="py-24 px-6 bg-surface/50">
-      <div className="max-w-6xl mx-auto">
+    <section id="projects" className="py-20 md:py-28 px-6 border-t border-border">
+      <div className="max-w-5xl mx-auto">
         <ScrollReveal>
-          <h2 className="text-3xl font-bold mb-2 gradient-text inline-block">Projects</h2>
-          <div className="w-16 h-1 bg-primary rounded mb-12" />
+          <h2 className="font-[family-name:var(--font-serif)] text-4xl md:text-5xl font-bold text-foreground mb-12">Projects</h2>
         </ScrollReveal>
 
         <div className="grid md:grid-cols-2 gap-6">
           {projects.map((project, index) => (
-            <ScrollReveal key={project._id} delay={index * 100}>
-              <div className="bg-bg rounded-xl overflow-hidden border border-border card-glow group h-full flex flex-col">
+            <ScrollReveal key={project._id} delay={index > 1 ? 100 : 0}>
+              <div className="bg-surface rounded overflow-hidden border border-border hover:border-primary transition-colors group h-full flex flex-col">
                 {project.image && (
                   <div className="overflow-hidden">
                     <Image
@@ -29,15 +28,15 @@ export default function Projects({ projects }: Props) {
                       alt={project.title}
                       width={600}
                       height={340}
-                      className="w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full object-cover group-hover:scale-102 transition-transform duration-300"
                     />
                   </div>
                 )}
                 <div className="p-6 flex flex-col flex-1">
                   <div className="flex items-center gap-2 mb-2">
-                    <h3 className="text-xl font-semibold">{project.title}</h3>
+                    <h3 className="font-[family-name:var(--font-serif)] text-xl font-semibold">{project.title}</h3>
                     {project.featured && (
-                      <span className="text-[10px] uppercase tracking-wider bg-primary/20 text-primary px-2 py-0.5 rounded-full font-medium">
+                      <span className="text-[10px] uppercase tracking-wider bg-accent/15 text-accent px-2 py-0.5 rounded font-medium">
                         Featured
                       </span>
                     )}
@@ -52,7 +51,7 @@ export default function Projects({ projects }: Props) {
                       {project.technologies.map((tech) => (
                         <span
                           key={tech._id}
-                          className="text-xs bg-surface px-2.5 py-1 rounded-full text-accent border border-border"
+                          className="text-xs bg-bg px-2.5 py-1 rounded text-muted"
                         >
                           {tech.name}
                         </span>
@@ -64,7 +63,7 @@ export default function Projects({ projects }: Props) {
                     {project.slug?.current && (
                       <a
                         href={`/projects/${project.slug.current}`}
-                        className="text-sm text-primary hover:text-foreground transition-colors font-medium"
+                        className="text-sm text-primary hover:text-secondary transition-colors font-medium"
                       >
                         Read More →
                       </a>
