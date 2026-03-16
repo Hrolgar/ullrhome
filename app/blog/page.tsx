@@ -39,7 +39,7 @@ export default async function BlogPage() {
             <div className="flex flex-wrap gap-2 mb-10">
               <a
                 href="/blog"
-                className="text-xs bg-primary/15 text-primary px-3 py-1.5 rounded font-medium"
+                className="text-xs bg-primary/15 text-primary px-3 py-1.5 rounded font-medium border border-transparent"
                 aria-current="page"
               >
                 All

@@ -80,7 +80,7 @@ export default async function CategoryPage({ params }: PageProps) {
                 href={`/blog/category/${cat.slug.current}`}
                 className={`text-xs px-3 py-1.5 rounded font-medium ${
                   cat.slug.current === slug
-                    ? "bg-primary/15 text-primary"
+                    ? "bg-primary/15 text-primary border border-transparent"
                     : "bg-surface text-muted border border-border hover:text-foreground hover:border-primary transition-all"
                 }`}
               >
