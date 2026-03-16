@@ -1,4 +1,3 @@
-import ScrollReveal from "./ScrollReveal";
 import type { ContactInfo } from "@/sanity/types";
 
 interface Props {
@@ -19,52 +18,43 @@ export default function Contact({ contact }: Props) {
   ].filter((s) => s.url);
 
   return (
-    <section id="contact" className="py-20 md:py-28 px-6 border-t border-border">
-      <div className="max-w-3xl mx-auto text-center">
-        <ScrollReveal>
-          <h2 className="font-[family-name:var(--font-serif)] text-4xl md:text-5xl font-bold text-foreground mb-8">Get in Touch</h2>
-        </ScrollReveal>
-
-        <ScrollReveal delay={100}>
+    <section id="contact" className="py-12 px-6 border-t border-border">
+      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-6">
           {contact.availableForWork && (
-            <div className="inline-flex items-center gap-2 bg-accent/10 text-accent px-4 py-2 rounded mb-8 text-sm font-medium">
+            <span className="inline-flex items-center gap-2 text-sm text-accent font-medium">
               <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-              Available for new opportunities
-            </div>
+              Available
+            </span>
           )}
-
           {contact.email && (
             <a
               href={`mailto:${contact.email}`}
-              className="block text-2xl text-foreground hover:text-primary transition-colors mb-8 font-medium"
+              className="text-foreground hover:text-primary transition-colors font-medium"
             >
               {contact.email}
             </a>
           )}
+        </div>
 
-          {socials.length > 0 && (
-            <div className="flex justify-center gap-6 mb-8">
-              {socials.map((social) => (
-                <a
-                  key={social.key}
-                  href={social.url!}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted hover:text-primary transition-colors"
-                  aria-label={social.label}
-                >
-                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d={socialIcons[social.key]} />
-                  </svg>
-                </a>
-              ))}
-            </div>
-          )}
-
-          {contact.location && (
-            <p className="text-muted text-sm">{contact.location}</p>
-          )}
-        </ScrollReveal>
+        {socials.length > 0 && (
+          <div className="flex gap-4">
+            {socials.map((social) => (
+              <a
+                key={social.key}
+                href={social.url!}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted hover:text-primary transition-colors"
+                aria-label={social.label}
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d={socialIcons[social.key]} />
+                </svg>
+              </a>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

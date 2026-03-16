@@ -3,8 +3,6 @@
 import { useState, useEffect, useCallback } from "react";
 
 const sections = [
-  { label: "About", href: "/#about", id: "about" },
-  { label: "Experience", href: "/#experience", id: "experience" },
   { label: "Projects", href: "/#projects", id: "projects" },
   { label: "Blog", href: "/blog", id: null },
   { label: "Contact", href: "/#contact", id: "contact" },
@@ -47,7 +45,6 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Skip to content */}
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded"

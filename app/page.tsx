@@ -42,11 +42,11 @@ export default async function Home() {
       <main id="main-content">
         <Hero about={about} />
         <About about={about} />
-        <Skills skills={skills} />
         <Experience experience={experience} />
+        <Skills skills={skills} />
         <Projects projects={projects} />
-        <Certifications certifications={certifications} />
         <Homelab services={homelabServices} />
+        <Certifications certifications={certifications} />
         <BlogPreview posts={featuredPosts} />
         <Contact contact={contact} />
       </main>

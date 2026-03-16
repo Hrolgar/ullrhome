@@ -1,42 +1,13 @@
-const navLinks = [
-  { label: "About", href: "/#about" },
-  { label: "Experience", href: "/#experience" },
-  { label: "Projects", href: "/#projects" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/#contact" },
-];
-
 export default function Footer() {
   return (
-    <footer className="py-12 px-6 border-t border-border">
-      <div className="max-w-5xl mx-auto">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-8">
-          <a href="/" className="font-[family-name:var(--font-serif)] text-lg font-semibold text-foreground">
-            Ullrhome
-          </a>
-          <nav aria-label="Footer navigation">
-            <ul className="flex flex-wrap gap-x-6 gap-y-2">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-muted hover:text-foreground transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-border">
-          <p className="text-xs text-muted">
-            &copy; {new Date().getFullYear()} Ullrhome. All rights reserved.
-          </p>
-          <p className="text-xs text-muted">
-            Built with Next.js &amp; Sanity
-          </p>
-        </div>
+    <footer className="py-8 px-6 border-t border-border">
+      <div className="max-w-5xl mx-auto flex items-center justify-between">
+        <p className="text-xs text-muted">
+          &copy; {new Date().getFullYear()} Ullrhome
+        </p>
+        <p className="text-xs text-muted">
+          Built with Next.js
+        </p>
       </div>
     </footer>
   );
