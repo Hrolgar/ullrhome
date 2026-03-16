@@ -65,7 +65,7 @@ export default function BlogPreview({ posts }: Props) {
                       {post.categories.map((cat) => (
                         <span
                           key={cat._id}
-                          className="text-[10px] bg-bg text-muted px-2 py-0.5 rounded"
+                          className="text-[10px] bg-surface-hover text-muted px-2 py-0.5 rounded"
                         >
                           {cat.title}
                         </span>

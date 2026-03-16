@@ -51,7 +51,7 @@ export default function Projects({ projects }: Props) {
                       {project.technologies.map((tech) => (
                         <span
                           key={tech._id}
-                          className="text-xs bg-bg px-2.5 py-1 rounded text-muted"
+                          className="text-xs bg-surface-hover px-2.5 py-1 rounded text-muted"
                         >
                           {tech.name}
                         </span>

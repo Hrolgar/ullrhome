@@ -102,7 +102,7 @@ export default async function BlogPage() {
                         {post.tags.slice(0, 3).map((tag) => (
                           <span
                             key={tag}
-                            className="text-[10px] text-muted bg-bg px-2 py-0.5 rounded"
+                            className="text-[10px] text-muted bg-surface-hover px-2 py-0.5 rounded"
                           >
                             #{tag}
                           </span>
