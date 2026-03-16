@@ -28,6 +28,28 @@ function block(text: string) {
 async function seed() {
   console.log("Seeding Sanity CMS...\n");
 
+  // --- Clean up old data ---
+  console.log("Cleaning up old data...");
+
+  // Delete all certifications
+  const certifications = await client.fetch(`*[_type == "certification"]._id`);
+  for (const id of certifications) {
+    await client.delete(id);
+  }
+
+  // Delete old homelab services that no longer exist
+  const oldHomelabIds = [
+    "homelab-nginx-proxy-manager",
+    "homelab-grafana",
+    "homelab-portainer",
+  ];
+  for (const id of oldHomelabIds) {
+    try { await client.delete(id); } catch { /* may not exist */ }
+  }
+
+  // Delete old skill that no longer exists
+  try { await client.delete("skill-raspberry-pi"); } catch { /* may not exist */ }
+
   // --- Site Settings ---
   console.log("Creating site settings...");
   await client.createOrReplace({
@@ -43,19 +65,18 @@ async function seed() {
     _id: "about",
     _type: "about",
     heading: "Hrolgar",
-    tagline: "Building software by day infrastructure by night",
+    tagline: "Software developer and self-hosting enthusiast from Norway",
     roles: [
       ".NET Developer",
-      "Homelab Enthusiast",
-      "Self-Hosting Advocate",
-      "AI Tinkerer",
+      "Infrastructure Tinkerer",
+      "Self-Hosting Enthusiast",
     ],
     body: [
       block(
-        "I'm a .NET developer at SpareBank 1 in Norway, building financial applications in the Norwegian banking sector. My day-to-day revolves around the .NET stack — C#, ASP.NET Core, Entity Framework, SQL Server — where reliability isn't optional and every line of code handles real money. It's the kind of work that teaches you to appreciate well-tested systems and defensive programming."
+        "I build financial software at SpareBank 1 in Norway. Day job is .NET — C#, ASP.NET Core, SQL Server — the kind of stack where you test everything twice because the code handles real money. It's taught me to value systems that actually work over systems that look impressive in a slide deck."
       ),
       block(
-        "Outside of work, I disappear into my homelab. I run an extensive self-hosted infrastructure on Proxmox — everything from media servers and identity providers to monitoring dashboards and secrets management. My latest project is Hrolbot, an AI agent system running on a Raspberry Pi 5 that coordinates autonomous Claude Code agents through an MCP mesh. Each agent specializes in a different role — frontend, backend, code review — and they communicate through structured messages to ship real code. It's equal parts practical and ridiculous, which is exactly how I like my side projects."
+        "After hours I run a homelab that's probably more infrastructure than one person needs. Proxmox cluster, a dozen Docker stacks, GitLab, Authentik for SSO, Cloudflare tunnels — the whole thing managed with OpenTofu. My current obsession is Hrolbot: an AI agent system running on a VM in the lab, where autonomous Claude Code agents coordinate through a message mesh to write and review code. It works better than it has any right to."
       ),
     ],
   });
@@ -66,7 +87,7 @@ async function seed() {
     _id: "contactInfo",
     _type: "contactInfo",
     github: "https://github.com/Hrolgar",
-    location: "Aalesund Norway",
+    location: "Ålesund, Norway",
     availableForWork: false,
   });
 
@@ -74,39 +95,43 @@ async function seed() {
   console.log("Creating skills...");
   const skills = [
     // Languages
-    { name: "C#", category: "language", proficiency: 5, order: 1 },
-    { name: "Python", category: "language", proficiency: 4, order: 2 },
-    { name: "TypeScript", category: "language", proficiency: 4, order: 3 },
-    { name: "JavaScript", category: "language", proficiency: 4, order: 4 },
-    { name: "Go", category: "language", proficiency: 3, order: 5 },
-    { name: "SQL", category: "language", proficiency: 4, order: 6 },
-    { name: "Bash", category: "language", proficiency: 3, order: 7 },
+    { name: "C#", category: "language", order: 1 },
+    { name: "Python", category: "language", order: 2 },
+    { name: "TypeScript", category: "language", order: 3 },
+    { name: "JavaScript", category: "language", order: 4 },
+    { name: "SQL", category: "language", order: 5 },
+    { name: "Bash", category: "language", order: 6 },
+    { name: "Go", category: "language", order: 7 },
+    { name: "HCL", category: "language", order: 8 },
     // Frameworks
-    { name: ".NET", category: "framework", proficiency: 5, order: 8 },
-    { name: "React", category: "framework", proficiency: 3, order: 9 },
-    { name: "Next.js", category: "framework", proficiency: 3, order: 10 },
-    { name: "Blazor", category: "framework", proficiency: 3, order: 11 },
-    { name: "Entity Framework", category: "framework", proficiency: 4, order: 12 },
+    { name: ".NET", category: "framework", order: 9 },
+    { name: "ASP.NET Core", category: "framework", order: 10 },
+    { name: "Entity Framework", category: "framework", order: 11 },
+    { name: "React", category: "framework", order: 12 },
+    { name: "Next.js", category: "framework", order: 13 },
+    { name: "Blazor", category: "framework", order: 14 },
     // DevOps
-    { name: "Docker", category: "devops", proficiency: 4, order: 13 },
-    { name: "Proxmox", category: "devops", proficiency: 4, order: 14 },
-    { name: "Cloudflare", category: "devops", proficiency: 3, order: 15 },
-    { name: "GitHub Actions", category: "devops", proficiency: 4, order: 16 },
-    { name: "OpenTofu", category: "devops", proficiency: 3, order: 17 },
-    // Databases
-    { name: "PostgreSQL", category: "database", proficiency: 4, order: 18 },
-    { name: "SQL Server", category: "database", proficiency: 4, order: 19 },
-    { name: "SQLite", category: "database", proficiency: 3, order: 20 },
-    { name: "Redis", category: "database", proficiency: 3, order: 21 },
+    { name: "Docker", category: "devops", order: 15 },
+    { name: "Proxmox", category: "devops", order: 16 },
+    { name: "OpenTofu", category: "devops", order: 17 },
+    { name: "GitHub Actions", category: "devops", order: 18 },
+    { name: "GitLab CI", category: "devops", order: 19 },
+    { name: "Cloudflare", category: "devops", order: 20 },
     // Tools
-    { name: "Git", category: "tool", proficiency: 4, order: 22 },
-    { name: "VS Code", category: "tool", proficiency: 4, order: 23 },
-    { name: "Linux", category: "tool", proficiency: 4, order: 24 },
-    { name: "Infisical", category: "tool", proficiency: 3, order: 25 },
+    { name: "Git", category: "tool", order: 21 },
+    { name: "Linux", category: "tool", order: 22 },
+    { name: "Traefik", category: "tool", order: 23 },
+    { name: "Authentik", category: "tool", order: 24 },
+    { name: "Infisical", category: "tool", order: 25 },
+    { name: "VS Code", category: "tool", order: 26 },
+    // Databases
+    { name: "SQL Server", category: "database", order: 27 },
+    { name: "PostgreSQL", category: "database", order: 28 },
+    { name: "SQLite", category: "database", order: 29 },
+    { name: "Redis", category: "database", order: 30 },
     // Platforms
-    { name: "Azure", category: "platform", proficiency: 3, order: 26 },
-    { name: "Vercel", category: "platform", proficiency: 3, order: 27 },
-    { name: "Raspberry Pi", category: "platform", proficiency: 4, order: 28 },
+    { name: "Azure", category: "platform", order: 31 },
+    { name: "Vercel", category: "platform", order: 32 },
   ];
 
   const skillIds: Record<string, string> = {};
@@ -126,19 +151,13 @@ async function seed() {
     _id: "exp-sparebank1",
     _type: "experience",
     company: "SpareBank 1",
-    role: ".NET Developer",
-    location: "Aalesund Norway",
+    role: "Software Developer",
+    location: "Ålesund, Norway",
     startDate: "2023-01-01",
     description: [
       block(
-        "Building and maintaining financial applications in the Norwegian banking sector. Working primarily with the .NET stack, focusing on reliable, well-tested systems that handle real money."
+        "Full-stack development on financial applications in the Norwegian banking sector. Primarily .NET — building APIs, integrating payment systems, and maintaining the kind of software where bugs have consequences."
       ),
-    ],
-    technologies: [
-      { _type: "reference", _ref: skillIds["C#"], _key: "t1" },
-      { _type: "reference", _ref: skillIds[".NET"], _key: "t2" },
-      { _type: "reference", _ref: skillIds["SQL Server"], _key: "t3" },
-      { _type: "reference", _ref: skillIds["Azure"], _key: "t4" },
     ],
     order: 1,
   });
@@ -168,16 +187,29 @@ async function seed() {
   // --- Homelab Services ---
   console.log("Creating homelab services...");
   const homelabServices = [
-    { name: "Proxmox VE", description: "Virtualization platform running all VMs and containers in the homelab.", category: "virtualization", order: 1 },
-    { name: "Docker", description: "Container runtime for running self-hosted applications.", category: "virtualization", order: 2 },
-    { name: "Cloudflare Tunnels", description: "Secure external access to homelab services without exposing ports.", category: "networking", order: 3 },
-    { name: "Authentik", description: "Identity and SSO provider for single sign-on across all services.", category: "identity", order: 4 },
-    { name: "Jellyfin", description: "Self-hosted media server for movies, TV shows, and music.", category: "media", order: 5 },
-    { name: "Hrolbot", description: "AI assistant platform running on a Raspberry Pi 5 with autonomous Claude Code agents.", category: "automation", order: 6 },
-    { name: "Infisical", description: "Self-hosted secrets management for securely storing and distributing credentials.", category: "security", order: 7 },
-    { name: "Nginx Proxy Manager", description: "Reverse proxy with a web UI for managing SSL certificates and routing.", category: "networking", order: 8 },
-    { name: "Grafana", description: "Monitoring and observability dashboards for tracking homelab metrics.", category: "monitoring", order: 9 },
-    { name: "Portainer", description: "Docker management UI for deploying and monitoring containers.", category: "development", order: 10 },
+    // Virtualization
+    { name: "Proxmox VE", description: "Bare-metal hypervisor running all VMs and containers", category: "virtualization", order: 1 },
+    { name: "Docker", description: "Container runtime on all application VMs", category: "virtualization", order: 2 },
+    // Networking
+    { name: "Cloudflare Tunnels", description: "Zero Trust access to internal services — no exposed ports", category: "networking", order: 3 },
+    { name: "Traefik", description: "Reverse proxy with Authentik forward auth on every VM", category: "networking", order: 4 },
+    // Identity
+    { name: "Authentik", description: "Self-hosted SSO and identity provider for all services", category: "identity", order: 5 },
+    // Security
+    { name: "Infisical", description: "Self-hosted secrets management for credentials and API keys", category: "security", order: 6 },
+    // Media
+    { name: "Jellyfin", description: "Media server for movies, TV, and music", category: "media", order: 7 },
+    { name: "Sonarr & Radarr", description: "Automated media management and downloads", category: "media", order: 8 },
+    { name: "Audiobookshelf", description: "Audiobook and podcast server", category: "media", order: 9 },
+    { name: "Tdarr", description: "Automated media transcoding", category: "media", order: 10 },
+    // Storage
+    { name: "Immich", description: "Self-hosted photo and video backup (Google Photos alternative)", category: "storage", order: 11 },
+    { name: "ZFS", description: "Storage pools with 40TB NAS and SSD caching", category: "storage", order: 12 },
+    // Development
+    { name: "GitLab", description: "Self-hosted Git with CI/CD pipelines", category: "development", order: 13 },
+    { name: "Hrolbot", description: "Multi-agent AI system for autonomous development", category: "development", order: 14 },
+    // Automation
+    { name: "OpenTofu", description: "Infrastructure as Code for the entire homelab", category: "automation", order: 15 },
   ];
 
   for (const svc of homelabServices) {
@@ -195,32 +227,32 @@ async function seed() {
   await client.createOrReplace({
     _id: "post-ai-agent-mesh-rpi",
     _type: "post",
-    title: "Building an AI Agent Mesh on a Raspberry Pi",
-    slug: { _type: "slug", current: "building-ai-agent-mesh-raspberry-pi" },
+    title: "Building an AI Agent Mesh in My Homelab",
+    slug: { _type: "slug", current: "building-ai-agent-mesh-homelab" },
     excerpt:
-      "How I built Hrolbot — a multi-agent AI system running on a Raspberry Pi 5, powered by Claude Code and coordinated through an MCP mesh.",
+      "How I built Hrolbot — a multi-agent AI system running on a Proxmox VM, where Claude Code agents coordinate through an MCP mesh to write and review real code.",
     publishedAt: "2026-03-10T10:00:00Z",
     featured: true,
     categories: [
       { _type: "reference", _ref: categoryIds["homelab"], _key: "c1" },
       { _type: "reference", _ref: categoryIds["development"], _key: "c2" },
     ],
-    tags: ["raspberry-pi", "ai", "claude", "mcp", "hrolbot"],
+    tags: ["proxmox", "ai", "claude", "mcp", "hrolbot"],
     body: [
       block(
-        "A few months ago I had one of those ideas that sounds reasonable at 2 AM: what if I ran a fleet of AI agents on a Raspberry Pi 5? Not as a proof of concept, but as something I actually use daily. That idea became Hrolbot."
+        "A few months ago I had one of those ideas that sounds reasonable at 2 AM: what if I ran a fleet of AI agents on a Proxmox VM in my homelab? Not as a proof of concept, but as something I actually use daily. That idea became Hrolbot."
       ),
       block(
         "Hrolbot is a multi-agent system where each agent — a frontend developer, a backend developer, a reviewer — runs as an autonomous Claude Code instance. They coordinate through an MCP (Model Context Protocol) mesh, passing messages, sharing state, and handing off tasks to each other. An orchestrator agent receives instructions from Discord and delegates work to the right specialist."
       ),
       block(
-        "The Raspberry Pi 5 handles the coordination layer: the MCP server, the message bus, the state store. The actual AI inference happens in the cloud via the Anthropic API, so the Pi doesn't need to do any heavy lifting on that front. It just needs to keep the mesh running and the agents talking."
+        "The Proxmox VM handles the coordination layer: the MCP server, the message bus, the state store. The actual AI inference happens in the cloud via the Anthropic API, so the VM doesn't need to do any heavy lifting on that front. It just needs to keep the mesh running and the agents talking."
       ),
       block(
-        "One of the more interesting challenges was getting the agents to work together without stepping on each other. Each agent operates in its own workspace, commits to its own branch, and communicates through structured messages. The orchestrator handles merge coordination and conflict resolution. It's not perfect, but it works surprisingly well for a system running on a £80 single-board computer."
+        "One of the more interesting challenges was getting the agents to work together without stepping on each other. Each agent operates in its own workspace, commits to its own branch, and communicates through structured messages. The orchestrator handles merge coordination and conflict resolution. It's not perfect, but it works surprisingly well for a system running on a 4-core VM with 8GB of RAM."
       ),
       block(
-        "The whole thing is open source. If you're curious about running your own agent mesh — or you just want to see what happens when you give a Pi more responsibility than it probably deserves — check out the repo on GitHub."
+        "The whole thing is open source. If you're curious about running your own agent mesh — or you just want to see what happens when you give a VM more responsibility than it probably deserves — check out the repo on GitHub."
       ),
     ],
   });
@@ -263,13 +295,13 @@ async function seed() {
     title: "Hrolbot",
     slug: { _type: "slug", current: "hrolbot" },
     summary:
-      "An AI assistant platform running on a Raspberry Pi 5. Multi-agent system with Claude Code agents coordinated through an MCP mesh.",
+      "Multi-agent AI system running on a Proxmox VM. Autonomous Claude Code agents coordinated through an MCP mesh — each specializing in frontend, backend, review, or DevOps.",
     description: [
       block(
-        "Hrolbot is a multi-agent AI system that runs on a Raspberry Pi 5. It uses Claude Code to power autonomous agents — each specializing in a different role like frontend development, backend development, or code review. The agents communicate through an MCP (Model Context Protocol) mesh, sharing state and handing off tasks."
+        "Hrolbot started as a Discord bot that calls Claude Code. It evolved into a multi-agent system where specialized workers — frontend, backend, reviewer, testing, research — operate autonomously on separate Linux user accounts. They coordinate through a shared message mesh, write code on feature branches, review each other's work, and push to GitHub."
       ),
       block(
-        "An orchestrator agent receives commands from Discord and delegates work to the appropriate specialist agents. Each agent works in its own isolated workspace, commits to feature branches, and reports results back through the mesh. The system handles everything from code generation to PR creation."
+        "The orchestrator receives tasks from Discord, delegates to the right workers, and reports results. The whole system runs on a 4-core Proxmox VM with 8GB RAM. Workers use tmux sessions for long tasks and a SQLite database for task tracking."
       ),
     ],
     githubUrl: "https://github.com/Hrolgar/hrolbot",
@@ -277,10 +309,33 @@ async function seed() {
     technologies: [
       { _type: "reference", _ref: skillIds["Python"], _key: "t1" },
       { _type: "reference", _ref: skillIds["TypeScript"], _key: "t2" },
-      { _type: "reference", _ref: skillIds["Raspberry Pi"], _key: "t3" },
-      { _type: "reference", _ref: skillIds["Docker"], _key: "t4" },
+      { _type: "reference", _ref: skillIds["Docker"], _key: "t3" },
+      { _type: "reference", _ref: skillIds["Linux"], _key: "t4" },
     ],
     order: 1,
+  });
+
+  await client.createOrReplace({
+    _id: "project-codex",
+    _type: "project",
+    title: "Codex",
+    slug: { _type: "slug", current: "codex" },
+    summary:
+      "Self-hosted book and audiobook library manager with duplicate detection, series tracking, and provider-based metadata fetching.",
+    description: [
+      block(
+        "Codex is a library manager for ebooks and audiobooks. It scans directories, detects duplicates, tracks series, and fetches metadata from multiple providers (Google Books, Open Library, Audnexus). Built with FastAPI and React, designed to run self-hosted alongside Audiobookshelf."
+      ),
+    ],
+    githubUrl: "https://github.com/Hrolgar/codex",
+    featured: false,
+    technologies: [
+      { _type: "reference", _ref: skillIds["Python"], _key: "t1" },
+      { _type: "reference", _ref: skillIds["TypeScript"], _key: "t2" },
+      { _type: "reference", _ref: skillIds["React"], _key: "t3" },
+      { _type: "reference", _ref: skillIds["SQLite"], _key: "t4" },
+    ],
+    order: 2,
   });
 
   await client.createOrReplace({
@@ -289,24 +344,21 @@ async function seed() {
     title: "Ullrhome",
     slug: { _type: "slug", current: "ullrhome" },
     summary:
-      "This portfolio site. A CMS-driven personal site built with Next.js and Sanity, designed to showcase projects, skills, and homelab infrastructure.",
+      "This site. Portfolio and blog built with Next.js and Sanity CMS.",
     description: [
       block(
-        "Ullrhome is a personal portfolio and blog built with Next.js and Sanity CMS. It features a dark Nordic-inspired design with sections for projects, skills, experience, homelab services, and blog posts. All content is managed through Sanity Studio, making it easy to update without touching code."
-      ),
-      block(
-        "The site is fully server-rendered with on-demand revalidation via Sanity webhooks. It's deployed on Vercel and uses Tailwind CSS for styling."
+        "A personal portfolio site built with Next.js 16 and Sanity v5. All content is CMS-managed, the design uses Fraunces and DM Sans typography with a dark editorial theme. Built almost entirely by Hrolbot's worker agents as a test of the multi-agent system."
       ),
     ],
     githubUrl: "https://github.com/Hrolgar/ullrhome",
-    featured: true,
+    featured: false,
     technologies: [
       { _type: "reference", _ref: skillIds["TypeScript"], _key: "t1" },
       { _type: "reference", _ref: skillIds["Next.js"], _key: "t2" },
       { _type: "reference", _ref: skillIds["React"], _key: "t3" },
       { _type: "reference", _ref: skillIds["Vercel"], _key: "t4" },
     ],
-    order: 2,
+    order: 3,
   });
 
   console.log("\nSeeding complete!");
