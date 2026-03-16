@@ -10,7 +10,7 @@ const fraunces = Fraunces({ subsets: ["latin"], display: "swap", variable: "--fo
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], display: "swap", variable: "--font-mono" });
 
 export const viewport: Viewport = {
-  themeColor: "#f5f0eb",
+  themeColor: "#111116",
   width: "device-width",
   initialScale: 1,
 };

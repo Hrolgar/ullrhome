@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
-/* Nordic Editorial — warm light theme */
+/* Nordic Editorial — dark theme */
 :root {
-  --color-primary: #1a5653;
-  --color-secondary: #2d7a76;
-  --color-accent: #c45d3e;
-  --color-bg: #f5f0eb;
-  --color-surface: #ebe5de;
-  --color-surface-hover: #e0d9d0;
-  --color-text: #1a1a1a;
-  --color-text-secondary: #4a4540;
-  --color-border: #d4cdc4;
+  --color-primary: #5eaba8;
+  --color-secondary: #7ec8c5;
+  --color-accent: #e07a5f;
+  --color-bg: #111116;
+  --color-surface: #1a1a22;
+  --color-surface-hover: #24242e;
+  --color-text: #e8e4e0;
+  --color-text-secondary: #9a9590;
+  --color-border: #2e2e38;
   --radius: 4px;
 }
 
@@ -79,7 +79,7 @@ html {
 
 .animate-delay-100 { animation-delay: 100ms; }
 
-/* Prose styles for editorial light theme */
+/* Prose styles for editorial dark theme */
 .prose-editorial h1,
 .prose-editorial h2,
 .prose-editorial h3,
