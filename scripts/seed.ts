@@ -74,7 +74,7 @@ async function seed() {
     ],
     body: [
       block(
-        "I'm a system developer and partner at XLENT Ålesund, building full-stack solutions with C#/.NET, Blazor, and Microsoft Azure. My work ranges from CRM integrations and ERP systems to secure member portals — the kind of projects where clean architecture and solid data flows matter more than flashy demos."
+        "I'm a system developer at SpareBank 1, working with .NET and modern cloud technologies in the Norwegian financial sector. Previously a partner at XLENT Ålesund building full-stack solutions with C#/.NET, Blazor, and Microsoft Azure — from CRM integrations and ERP systems to secure member portals."
       ),
       block(
         "Outside of client work I run a homelab that's probably more infrastructure than one person needs. Proxmox cluster, a dozen Docker stacks, GitLab, Authentik for SSO, Cloudflare tunnels — the whole thing managed with OpenTofu. My current obsession is Hrolbot: an AI agent system running on a VM in the lab, where autonomous Claude Code agents coordinate through a message mesh to write and review code. It works better than it has any right to."
@@ -150,8 +150,20 @@ async function seed() {
   // --- Experience ---
   console.log("Creating experience...");
 
-  // Clean up old experience entries
-  try { await client.delete("exp-sparebank1"); } catch { /* may not exist */ }
+  await client.createOrReplace({
+    _id: "exp-sparebank1",
+    _type: "experience",
+    company: "SpareBank 1",
+    role: "Senior System Developer",
+    location: "Norway",
+    startDate: "2026-03-01",
+    description: [
+      block(
+        "System development in the Norwegian financial sector. Working with .NET and modern cloud technologies."
+      ),
+    ],
+    order: 0,
+  });
 
   await client.createOrReplace({
     _id: "exp-xlent",
@@ -160,6 +172,7 @@ async function seed() {
     role: "Senior System Developer & Partner",
     location: "Ålesund, Norway",
     startDate: "2023-08-01",
+    endDate: "2026-02-01",
     description: [
       block(
         "Full-stack solutions with C#/.NET, Blazor, and Microsoft Azure. CRM integrations, ERP systems, and secure member portals for clients including 62°Nord Hotel & Adventures and Reisegarantifondet. Data integrations via Azure Service Bus and Dynamics 365, authentication with Duende, cloud storage with Cosmos DB and Blob Storage."
