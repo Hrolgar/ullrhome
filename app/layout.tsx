@@ -27,7 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${siteName}`,
     },
     description,
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://ullrhome.com"),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://hrolgar.com"),
     icons: {
       icon: "/icon.svg",
     },
@@ -56,7 +56,7 @@ export default async function RootLayout({
       <head>
         <Script
           src="https://umami.hrolgar.com/script.js"
-          data-website-id="PLACEHOLDER_ID"
+          data-website-id="4c80368f-5246-4407-9733-abca5084b9e6"
           strategy="afterInteractive"
         />
       </head>
