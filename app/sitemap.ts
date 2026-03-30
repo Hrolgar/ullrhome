@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getProjectSlugs, getPostSlugs, getCategories } from "@/sanity/lib/queries";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ullrhome.com";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://hrolgar.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [projectSlugs, postSlugs, categories] = await Promise.all([

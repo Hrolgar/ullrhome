@@ -81,7 +81,7 @@ export default function Footer({ contact, footerTagline, siteName }: Props) {
         )}
 
         <p className="text-xs text-muted md:col-span-3 pt-6 border-t border-border">
-          &copy; {new Date().getFullYear()} Ullrhome
+          &copy; {new Date().getFullYear()} {siteName || "Hrolgar"}
         </p>
       </div>
     </footer>

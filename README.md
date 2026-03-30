@@ -1,3 +1,3 @@
-# Ullrhome
+# hrolgar.com
 
-Personal portfolio and freelance services site for [hrolgar.com](https://www.hrolgar.com).
+Personal portfolio and freelance services site — [hrolgar.com](https://hrolgar.com).

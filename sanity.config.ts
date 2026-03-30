@@ -7,8 +7,8 @@ import { structure } from "@/sanity/structure";
 import { projectId, dataset } from "@/sanity/env";
 
 export default defineConfig({
-  name: "ullrhome",
-  title: "Ullrhome",
+  name: "hrolgar",
+  title: "Hrolgar",
   projectId,
   dataset,
   plugins: [structureTool({ structure, name: "studio", title: "Studio" }), visionTool(), codeInput()],

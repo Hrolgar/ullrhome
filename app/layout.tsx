@@ -18,7 +18,7 @@ export const viewport: Viewport = {
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
-  const siteName = settings?.siteName || "Ullrhome";
+  const siteName = settings?.siteName || "Hrolgar";
   const description = settings?.siteDescription || "Personal portfolio and blog";
 
   return {

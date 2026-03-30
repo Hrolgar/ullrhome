@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "Ullrhome Studio",
-  description: "Content management for Ullrhome",
+  title: "Hrolgar Studio",
+  description: "Content management for hrolgar.com",
 };
 
 export default function StudioLayout({

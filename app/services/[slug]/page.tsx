@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${service.title} — Ullrhome`,
+    title: `${service.title} — Hrolgar`,
     description: service.summary || `${service.title} — professional service by Hrolgar`,
   };
 }
