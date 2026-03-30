@@ -35,6 +35,10 @@ export interface About {
   heading?: string;
   tagline?: string;
   roles?: string[];
+  heroCta1Text?: string;
+  heroCta1Link?: string;
+  heroCta2Text?: string;
+  heroCta2Link?: string;
   body?: PortableTextBlock[];
   profileImage?: SanityImage;
   resumeFile?: {
@@ -132,12 +136,6 @@ export interface FAQ {
 export interface PageContent {
   _id: string;
   _type: "pageContent";
-  heroEyebrow?: string;
-  heroTagline?: string;
-  heroCta1Text?: string;
-  heroCta1Link?: string;
-  heroCta2Text?: string;
-  heroCta2Link?: string;
   contactHeading?: string;
   contactIntro?: string;
   hireHeading?: string;

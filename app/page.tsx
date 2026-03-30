@@ -46,7 +46,7 @@ export default async function Home() {
       <ScrollProgress />
       <Navbar navItems={pageContent?.navItems} />
       <main id="main-content">
-        <Hero about={about} pageContent={pageContent} />
+        <Hero about={about} />
         <About about={about} heading={pageContent?.aboutHeading} />
         <Experience experience={experience} heading={pageContent?.experienceHeading} />
         <Skills skills={skills} heading={pageContent?.skillsHeading} />

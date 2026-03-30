@@ -1,19 +1,18 @@
-import type { About, PageContent } from "@/sanity/types";
+import type { About } from "@/sanity/types";
 import RotatingText from "./RotatingText";
 
 interface Props {
   about: About | null;
-  pageContent: PageContent | null;
 }
 
-export default function Hero({ about, pageContent }: Props) {
+export default function Hero({ about }: Props) {
   const roles = about?.roles;
-  const staticEyebrow = pageContent?.heroEyebrow || roles?.[0] || "Freelance Backend Engineer";
-  const tagline = pageContent?.heroTagline || about?.tagline || "I build robust integrations, APIs, and backend systems that just work.";
-  const cta1Text = pageContent?.heroCta1Text || "See my work";
-  const cta1Link = pageContent?.heroCta1Link || "/#projects";
-  const cta2Text = pageContent?.heroCta2Text || "Get in touch";
-  const cta2Link = pageContent?.heroCta2Link || "/contact";
+  const staticEyebrow = roles?.[0] || "Freelance Backend Engineer";
+  const tagline = about?.tagline || "I build robust integrations, APIs, and backend systems that just work.";
+  const cta1Text = about?.heroCta1Text || "See my work";
+  const cta1Link = about?.heroCta1Link || "/#projects";
+  const cta2Text = about?.heroCta2Text || "Get in touch";
+  const cta2Link = about?.heroCta2Link || "/contact";
 
   return (
     <section className="min-h-screen px-6 pt-28 pb-16 md:pt-36 md:pb-24 flex items-center">
