@@ -100,6 +100,7 @@ export interface ContactInfo {
   linkedin?: string;
   upworkUrl?: string;
   freelancerUrl?: string;
+  location?: string;
   availableForWork?: boolean;
 }
 

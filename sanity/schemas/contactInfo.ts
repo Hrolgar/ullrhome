@@ -31,6 +31,12 @@ export default defineType({
       type: 'url',
     }),
     defineField({
+      name: 'location',
+      title: 'Location',
+      type: 'string',
+      description: 'e.g. Ålesund, Norway',
+    }),
+    defineField({
       name: 'availableForWork',
       title: 'Available for Work',
       type: 'boolean',

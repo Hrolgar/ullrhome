@@ -37,6 +37,9 @@ export default function Footer({ contact, footerTagline, siteName }: Props) {
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted">
             {footerTagline || 'Freelance backend engineering for integrations, APIs, and reliable systems.'}
           </p>
+          {contact?.location && (
+            <p className="mt-1 text-xs text-muted">{contact.location}</p>
+          )}
         </div>
 
         <nav aria-label="Footer navigation">
