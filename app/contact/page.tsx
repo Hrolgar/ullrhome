@@ -50,7 +50,7 @@ export default async function ContactPage() {
 
   return (
     <>
-      <Navbar />
+      <Navbar navItems={pageContent?.navItems} />
       <ContactPageClient
         contact={contact}
         services={services}
@@ -59,7 +59,7 @@ export default async function ContactPage() {
         forms={forms}
         defaultFAQs={defaultFAQs}
       />
-      <Footer contact={contact} />
+      <Footer contact={contact} footerTagline={pageContent?.footerTagline} />
     </>
   );
 }

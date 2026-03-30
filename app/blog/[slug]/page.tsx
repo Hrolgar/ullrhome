@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 import type { PortableTextBlock } from "@portabletext/types";
 import Image from "next/image";
-import { getPostBySlug, getPostSlugs } from "@/sanity/lib/queries";
+import { getPostBySlug, getPostSlugs, getPageContent } from "@/sanity/lib/queries";
 import { portableTextComponents } from "@/lib/portableText";
 import { urlFor } from "@/sanity/lib/image";
 import Navbar from "@/components/Navbar";
@@ -58,14 +58,14 @@ function estimateReadTime(body: PortableTextBlock[]): number {
 
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
-  const post = await getPostBySlug(slug);
+  const [post, pageContent] = await Promise.all([getPostBySlug(slug), getPageContent()]);
   if (!post) notFound();
 
   const readTime = post.body ? estimateReadTime(post.body) : null;
 
   return (
     <>
-      <Navbar />
+      <Navbar navItems={pageContent?.navItems} />
       <main id="main-content" className="pt-24 pb-16 px-6">
         <article className="max-w-3xl mx-auto">
           <a
@@ -146,7 +146,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           )}
         </article>
       </main>
-      <Footer />
+      <Footer footerTagline={pageContent?.footerTagline} />
     </>
   );
 }

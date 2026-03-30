@@ -1,10 +1,12 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { getPageContent } from "@/sanity/lib/queries";
 
-export default function NotFound() {
+export default async function NotFound() {
+  const pageContent = await getPageContent();
   return (
     <>
-      <Navbar />
+      <Navbar navItems={pageContent?.navItems} />
       <main id="main-content" className="min-h-screen flex items-center justify-center px-6">
         <div className="text-center animate-fade-in-up">
           <p className="text-sm font-medium text-primary uppercase tracking-widest mb-4">
@@ -32,7 +34,7 @@ export default function NotFound() {
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer footerTagline={pageContent?.footerTagline} />
     </>
   );
 }

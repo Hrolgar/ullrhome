@@ -34,7 +34,7 @@ export default async function ServicesPage() {
 
   return (
     <>
-      <Navbar />
+      <Navbar navItems={pageContent?.navItems} />
       <main id="main-content" className="px-6 pb-16 pt-24 md:pb-24">
         <div className="mx-auto max-w-5xl">
           <section className="border-b border-border pb-12 md:pb-16">
@@ -108,7 +108,7 @@ export default async function ServicesPage() {
           </section>
         </div>
       </main>
-      <Footer contact={contact} />
+      <Footer contact={contact} footerTagline={pageContent?.footerTagline} />
     </>
   );
 }
