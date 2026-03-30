@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
+import type { PortableTextBlock } from "@portabletext/types";
 import Image from "next/image";
 import { getPostBySlug, getPostSlugs } from "@/sanity/lib/queries";
 import { portableTextComponents } from "@/lib/portableText";
@@ -47,10 +48,10 @@ function formatDate(dateStr: string): string {
   });
 }
 
-function estimateReadTime(body: any[]): number {
+function estimateReadTime(body: PortableTextBlock[]): number {
   const text = body
-    .filter((b: any) => b._type === "block")
-    .map((b: any) => b.children?.map((c: any) => c.text).join("") || "")
+    .filter((b) => b._type === "block")
+    .map((b) => (b.children as Array<{ text?: string }> | undefined)?.map((c) => c.text).join("") || "")
     .join(" ");
   return Math.max(1, Math.round(text.split(/\s+/).length / 200));
 }

@@ -216,25 +216,3 @@ export interface HomelabService {
   url?: string;
   order?: number;
 }
-
-export interface FormField {
-  _key: string;
-  label: string;
-  name: string;
-  type: "text" | "email" | "textarea" | "select";
-  placeholder?: string;
-  required?: boolean;
-  options?: string[];
-}
-
-export interface ContactForm {
-  _id: string;
-  _type: "contactForm";
-  name: string;
-  slug: { current: string };
-  heading?: string;
-  description?: string;
-  fields?: FormField[];
-  submitText?: string;
-  successMessage?: string;
-}

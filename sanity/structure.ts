@@ -57,4 +57,32 @@ export const structure: StructureResolver = (S) =>
         .title("Homelab Services")
         .schemaType("homelabService")
         .child(S.documentTypeList("homelabService").title("Homelab Services")),
+
+      S.divider(),
+
+      // Services & FAQ
+      S.listItem()
+        .title("Services")
+        .schemaType("service")
+        .child(S.documentTypeList("service").title("Services")),
+      S.listItem()
+        .title("FAQ")
+        .schemaType("faq")
+        .child(S.documentTypeList("faq").title("FAQ")),
+
+      S.divider(),
+
+      // Forms
+      S.listItem()
+        .title("Contact Forms")
+        .schemaType("contactForm")
+        .child(S.documentTypeList("contactForm").title("Contact Forms")),
+
+      S.divider(),
+
+      // Settings
+      S.listItem()
+        .title("Page Content")
+        .id("pageContent")
+        .child(S.document().schemaType("pageContent").documentId("pageContent")),
     ]);
