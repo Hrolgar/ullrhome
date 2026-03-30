@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: `${category.title} — Blog`,
-    description: category.description || `Posts in ${category.title}`,
+    description: `Posts in ${category.title}`,
   };
 }
 
@@ -62,9 +62,6 @@ export default async function CategoryPage({ params }: PageProps) {
             <h1 className="font-[family-name:var(--font-serif)] text-4xl md:text-5xl font-bold mb-2 text-foreground">
               {category.title}
             </h1>
-            {category.description && (
-              <p className="text-muted text-base">{category.description}</p>
-            )}
           </div>
 
           <div className="flex flex-wrap gap-2 mb-10">

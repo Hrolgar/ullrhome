@@ -23,11 +23,6 @@ export default defineType({
       type: 'date',
     }),
     defineField({
-      name: 'expiryDate',
-      title: 'Expiry Date',
-      type: 'date',
-    }),
-    defineField({
       name: 'credentialUrl',
       title: 'Credential URL',
       type: 'url',

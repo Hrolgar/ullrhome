@@ -51,7 +51,6 @@ export interface Skill {
   name: string;
   category: string;
   icon?: SanityImage;
-  proficiency?: number;
   order?: number;
 }
 
@@ -95,13 +94,9 @@ export interface ContactInfo {
   email?: string;
   github?: string;
   linkedin?: string;
-  twitter?: string;
-  mastodon?: string;
   upworkUrl?: string;
   freelancerUrl?: string;
-  location?: string;
   availableForWork?: boolean;
-  contactFormEnabled?: boolean;
 }
 
 export interface FormField {
@@ -157,6 +152,24 @@ export interface PageContent {
   servicesIntro?: string;
   servicesCta?: string;
   servicesCtaDescription?: string;
+  serviceDetailCtaHeading?: string;
+  serviceDetailCtaDescription?: string;
+  serviceDetailCtaButtonText?: string;
+  navItems?: Array<{ _key: string; label: string; href: string }>;
+  footerTagline?: string;
+  aboutHeading?: string;
+  experienceHeading?: string;
+  projectsHeading?: string;
+  skillsHeading?: string;
+  homelabHeading?: string;
+  homelabSubtitle?: string;
+  certificationsHeading?: string;
+  blogPreviewHeading?: string;
+  contactSectionHeading?: string;
+  contactSectionTagline?: string;
+  floatingCtaText?: string;
+  blogPageHeading?: string;
+  blogPageSubtitle?: string;
 }
 
 export interface Service {
@@ -176,7 +189,6 @@ export interface Category {
   _type: "category";
   title: string;
   slug: { current: string };
-  description?: string;
 }
 
 export interface Post {
@@ -191,6 +203,7 @@ export interface Post {
   tags?: string[];
   publishedAt: string;
   featured?: boolean;
+  status: 'draft' | 'published';
 }
 
 export interface Certification {
@@ -199,7 +212,6 @@ export interface Certification {
   name: string;
   issuer: string;
   issueDate?: string;
-  expiryDate?: string;
   credentialUrl?: string;
   badge?: SanityImage;
   order?: number;

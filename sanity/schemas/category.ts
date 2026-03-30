@@ -18,11 +18,6 @@ export default defineType({
       options: {source: 'title', maxLength: 96},
       validation: (rule) => rule.required(),
     }),
-    defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
-    }),
   ],
   preview: {
     select: {title: 'title'},

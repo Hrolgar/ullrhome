@@ -84,6 +84,20 @@ export default defineType({
       type: 'boolean',
       initialValue: false,
     }),
+    defineField({
+      name: 'status',
+      title: 'Status',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Draft', value: 'draft'},
+          {title: 'Published', value: 'published'},
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'draft',
+      validation: (rule) => rule.required(),
+    }),
   ],
   orderings: [
     {
@@ -97,10 +111,12 @@ export default defineType({
       title: 'title',
       media: 'coverImage',
       date: 'publishedAt',
+      status: 'status',
     },
-    prepare({title, media, date}) {
+    prepare({title, media, date, status}) {
+      const statusLabel = status === 'published' ? '' : ' [DRAFT]';
       return {
-        title,
+        title: (title || '') + statusLabel,
         media,
         subtitle: date ? new Date(date).toLocaleDateString() : 'Draft',
       }

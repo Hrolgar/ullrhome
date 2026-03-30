@@ -21,16 +21,6 @@ export default defineType({
       type: 'url',
     }),
     defineField({
-      name: 'twitter',
-      title: 'Twitter / X',
-      type: 'url',
-    }),
-    defineField({
-      name: 'mastodon',
-      title: 'Mastodon',
-      type: 'url',
-    }),
-    defineField({
       name: 'upworkUrl',
       title: 'Upwork Profile',
       type: 'url',
@@ -41,22 +31,10 @@ export default defineType({
       type: 'url',
     }),
     defineField({
-      name: 'location',
-      title: 'Location',
-      type: 'string',
-    }),
-    defineField({
       name: 'availableForWork',
       title: 'Available for Work',
       type: 'boolean',
       initialValue: false,
-    }),
-    defineField({
-      name: 'contactFormEnabled',
-      title: 'Enable Contact Form',
-      type: 'boolean',
-      initialValue: false,
-      description: 'Show a contact form instead of just links',
     }),
   ],
   preview: {

@@ -71,7 +71,7 @@ export async function getProjectSlugs(): Promise<{ slug: { current: string } }[]
 export async function getPosts(limit?: number): Promise<Post[]> {
   const limitClause = limit ? `[0...${limit}]` : "";
   return (await client.fetch(
-    `*[_type == "post"] | order(publishedAt desc) ${limitClause} {
+    `*[_type == "post" && status == "published"] | order(publishedAt desc) ${limitClause} {
       ...,
       categories[]->,
     }`
@@ -80,7 +80,7 @@ export async function getPosts(limit?: number): Promise<Post[]> {
 
 export async function getFeaturedPosts(): Promise<Post[]> {
   return (await client.fetch(
-    `*[_type == "post" && featured == true] | order(publishedAt desc) [0...3] {
+    `*[_type == "post" && featured == true && status == "published"] | order(publishedAt desc) [0...3] {
       ...,
       categories[]->,
     }`
@@ -89,7 +89,7 @@ export async function getFeaturedPosts(): Promise<Post[]> {
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   return client.fetch(
-    `*[_type == "post" && slug.current == $slug][0] {
+    `*[_type == "post" && slug.current == $slug && status == "published"][0] {
       ...,
       categories[]->,
     }`,
@@ -99,7 +99,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 
 export async function getPostSlugs(): Promise<{ slug: { current: string } }[]> {
   return (await client.fetch(
-    `*[_type == "post" && defined(slug.current)]{ slug }`
+    `*[_type == "post" && defined(slug.current) && status == "published"]{ slug }`
   )) || [];
 }
 
@@ -111,7 +111,7 @@ export async function getCategories(): Promise<Category[]> {
 
 export async function getPostsByCategory(categorySlug: string): Promise<Post[]> {
   return (await client.fetch(
-    `*[_type == "post" && $categorySlug in categories[]->slug.current] | order(publishedAt desc) {
+    `*[_type == "post" && $categorySlug in categories[]->slug.current && status == "published"] | order(publishedAt desc) {
       ...,
       categories[]->,
     }`,

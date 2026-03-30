@@ -34,12 +34,6 @@ export default defineType({
       type: 'image',
     }),
     defineField({
-      name: 'proficiency',
-      title: 'Proficiency (1-5)',
-      type: 'number',
-      validation: (rule) => rule.min(1).max(5),
-    }),
-    defineField({
       name: 'order',
       title: 'Order',
       type: 'number',
