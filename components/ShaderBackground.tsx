@@ -37,16 +37,7 @@ export default function ShaderBackground({ src, className = "" }: Props) {
       src={src}
       aria-hidden="true"
       tabIndex={-1}
-      className={className}
-      style={{
-        position: "absolute",
-        inset: 0,
-        width: "100%",
-        height: "100%",
-        border: "none",
-        pointerEvents: "none",
-        zIndex: 0,
-      }}
+      className={`absolute inset-0 w-full h-full border-none pointer-events-none z-0 ${className}`}
     />
   );
 }
