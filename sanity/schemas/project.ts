@@ -19,6 +19,18 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'projectType',
+      title: 'Project Type',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Personal', value: 'personal'},
+          {title: 'Freelance', value: 'freelance'},
+        ],
+      },
+      initialValue: 'personal',
+    }),
+    defineField({
       name: 'summary',
       title: 'Summary',
       type: 'text',
@@ -113,8 +125,13 @@ export default defineType({
   preview: {
     select: {
       title: 'title',
-      subtitle: 'summary',
+      summary: 'summary',
+      projectType: 'projectType',
       media: 'image',
+    },
+    prepare({title, summary, projectType, media}: {title: string; summary?: string; projectType?: string; media?: unknown}) {
+      const subtitle = [projectType, summary].filter(Boolean).join(' — ')
+      return {title, subtitle, media}
     },
   },
 })

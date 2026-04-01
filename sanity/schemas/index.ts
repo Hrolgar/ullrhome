@@ -8,6 +8,7 @@ import post from './post'
 import category from './category'
 import certification from './certification'
 import homelabService from './homelabService'
+import homelabPage from './homelabPage'
 import service from './service'
 import faq from './faq'
 import contactForm from './contactForm'
@@ -24,6 +25,7 @@ export const schemaTypes = [
   category,
   certification,
   homelabService,
+  homelabPage,
   service,
   faq,
   contactForm,
