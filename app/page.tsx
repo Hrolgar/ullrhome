@@ -7,6 +7,7 @@ import {
   getCertifications,
   getHomelabPage,
   getFeaturedPosts,
+  getPosts,
   getPageContent,
   getSettings,
 } from "@/sanity/lib/queries";
@@ -29,7 +30,7 @@ import SectionDots from "@/components/SectionDots";
 export const revalidate = 3600;
 
 export default async function Home() {
-  const [about, skills, experience, projects, contact, certifications, homelabPage, featuredPosts, pageContent, settings] =
+  const [about, skills, experience, projects, contact, certifications, homelabPage, featuredPosts, recentPosts, pageContent, settings] =
     await Promise.all([
       getAbout(),
       getSkills(),
@@ -39,6 +40,7 @@ export default async function Home() {
       getCertifications(),
       getHomelabPage(),
       getFeaturedPosts(),
+      getPosts(3),
       getPageContent(),
       getSettings(),
     ]);
@@ -55,7 +57,7 @@ export default async function Home() {
         <Projects projects={projects} heading={pageContent?.projectsHeading} intro={pageContent?.projectsIntro} />
         <Homelab heading={pageContent?.homelabHeading} subtitle={pageContent?.homelabSubtitle} stats={homelabPage?.stats} />
         <Certifications certifications={certifications} heading={pageContent?.certificationsHeading} />
-        {settings?.showBlog !== false && <BlogPreview posts={featuredPosts} heading={pageContent?.blogPreviewHeading} showBlog={settings?.showBlog} />}
+        {settings?.showBlog !== false && <BlogPreview posts={featuredPosts.length > 0 ? featuredPosts : recentPosts} heading={pageContent?.blogPreviewHeading} showBlog={settings?.showBlog} />}
         <Contact contact={contact} heading={pageContent?.contactSectionHeading} tagline={pageContent?.contactSectionTagline} />
       </main>
       <Footer contact={contact} footerTagline={pageContent?.footerTagline} siteName={settings?.siteName} navItems={pageContent?.navItems} showBlog={settings?.showBlog} />
