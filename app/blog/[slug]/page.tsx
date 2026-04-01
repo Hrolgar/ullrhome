@@ -65,7 +65,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <>
-      <Navbar navItems={pageContent?.navItems} siteName={settings?.siteName} />
+      <Navbar navItems={pageContent?.navItems} siteName={settings?.siteName} showBlog={settings?.showBlog} />
       <main id="main-content" className="pt-24 pb-16 px-6">
         <article className="max-w-3xl mx-auto">
           <a

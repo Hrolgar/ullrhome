@@ -51,7 +51,7 @@ export default async function ContactPage() {
 
   return (
     <>
-      <Navbar navItems={pageContent?.navItems} siteName={settings?.siteName} />
+      <Navbar navItems={pageContent?.navItems} siteName={settings?.siteName} showBlog={settings?.showBlog} />
       <ContactPageClient
         contact={contact}
         services={services}

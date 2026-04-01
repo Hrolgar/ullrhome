@@ -45,7 +45,7 @@ export default async function ProjectPage({ params }: PageProps) {
 
   return (
     <>
-      <Navbar navItems={pageContent?.navItems} siteName={settings?.siteName} />
+      <Navbar navItems={pageContent?.navItems} siteName={settings?.siteName} showBlog={settings?.showBlog} />
       <main id="main-content" className="pt-24 pb-16 px-6">
         <article className="max-w-5xl mx-auto">
           {/* Back link */}

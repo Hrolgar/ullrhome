@@ -21,9 +21,12 @@ export async function POST(req: NextRequest) {
   }
 
   revalidatePath("/");
-  revalidatePath("/contact");
+  revalidatePath("/projects");
+  revalidatePath("/experience");
+  revalidatePath("/homelab");
   revalidatePath("/services");
   revalidatePath("/blog");
+  revalidatePath("/contact");
 
   return NextResponse.json({ revalidated: true, now: Date.now() });
 }

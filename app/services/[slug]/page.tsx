@@ -54,7 +54,7 @@ export default async function ServicePage({ params }: PageProps) {
 
   return (
     <>
-      <Navbar navItems={pageContent?.navItems} siteName={settings?.siteName} />
+      <Navbar navItems={pageContent?.navItems} siteName={settings?.siteName} showBlog={settings?.showBlog} />
       <main id="main-content" className="px-6 pb-16 pt-24">
         <article className="mx-auto max-w-3xl">
           <a
